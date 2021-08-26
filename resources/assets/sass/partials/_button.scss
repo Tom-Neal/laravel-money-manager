@@ -1,0 +1,14 @@
+@import "variables";
+
+button, a {
+    cursor: pointer;
+    transition: 0.3s all;
+}
+
+.btn-success {
+    font-weight: bold;
+}
+
+.fa-times {
+    font-size: 18px;
+}

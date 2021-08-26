@@ -1,0 +1,70 @@
+@import "partials/variables";
+@import "partials/helper";
+@import "partials/button";
+@import "partials/header";
+@import "partials/footer";
+@import "partials/sidebar";
+
+html, body {
+    background: #f7f7fc;
+    font-family: $ff1;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: $ff2;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+select, .form-check-input {
+    cursor: pointer;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.asterisk {
+    color: red;
+    font-weight: bold;
+}
+
+.text_large {
+    font-size: 20px;
+}
+
+.modal-title {
+    font-weight: bold;
+}
+
+.modal {
+    color: #000;
+    text-align: left;
+}
+.modal .modal-body {
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.icon_input { /* Positions icon inside input textbox */
+  float: right;
+  margin-right: 10px;
+  margin-top: -27px;
+  position: relative;
+  z-index: 2;
+  color: #C0C0C0;
+}
+
+.modal-xl {
+    width: 95%;
+    max-width: 1800px;
+}
+
+.toast-header {
+    border-bottom: none;
+}
+.toast_icon {
+    width: 30px;
+}

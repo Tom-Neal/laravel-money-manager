@@ -1,0 +1,15 @@
+@import "variables";
+
+footer {
+    width: 100%;
+    color: $col1;
+    background: #FFF;
+    .container {
+        width: auto;
+        max-width: 680px;
+        padding: 0 15px;
+    }
+    a {
+        color: $col1;
+    }
+}

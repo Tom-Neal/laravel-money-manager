@@ -1,0 +1,73 @@
+@import "variables";
+
+#dashboard {
+    padding: 80px 80px 100px 80px;
+    max-width: 1800px;
+}
+
+#page {
+    padding: 80px 20px;
+}
+
+.datetime-picker, .date-picker, .time-picker  {
+    background: #FFF !important;
+}
+
+.table_link { /* Reset link text to black */
+    color: #000;
+}
+
+.table_center {
+    text-align: center;
+}
+
+.table_col_width_5 {
+    width: 5%;
+}
+.table_col_width_7 {
+    width: 7%;
+}
+.table_col_width_10 {
+    width: 10%;
+}
+.table_col_width_15 {
+    width: 15%;
+}
+.table_col_width_20 {
+    width: 20%;
+}
+.table_col_width_25 {
+    width: 25%;
+}
+.table_col_width_30 {
+    width: 30%;
+}
+.table_col_width_35 {
+    width: 35%;
+}
+.table_col_width_40 {
+    width: 40%;
+}
+
+.badge-pill {
+    padding: 10px;
+}
+
+.pagination {
+    .page-item {
+        .page-link {
+            color: $col1;
+        }
+    }
+    .active {
+        .page-link {
+            background: $col1;
+            border: 1px solid $col1;
+            color: #FFF;
+        }
+    }
+}
+
+.tooltip {
+    opacity: 1 !important;
+}

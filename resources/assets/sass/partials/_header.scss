@@ -1,0 +1,57 @@
+@import "variables";
+
+header {
+    background-color: $col1 !important;
+}
+
+header, nav {
+    position: relative;
+    margin: 0 !important;
+    padding: 0 !important;
+    z-index: 1;
+}
+
+#menu-toggle {
+    padding-top: 3px;
+    border: none;
+    background: none;
+    margin-left: 12px;
+    border-radius: 6px;
+    svg {
+        color: $col1;
+        font-size: 28px;
+    }
+}
+
+.nav_guest {
+    @include flex(row, center, space-between);
+}
+
+.navbar-brand {
+    @include flex(row, center, space-between);
+}
+
+.nav-link {
+    color: darken(#FFF, 10%) !important;
+    &:hover {
+        color: #FFF !important;
+    }
+}
+
+#logo {
+    width: 60px;
+    margin: 5px 0 5px 10px;
+}
+
+#title {
+    margin-bottom: 0;
+    margin-left: 20px;
+    font-size: 28px;
+    color: #FFF;
+}
+
+header {
+    .fa-user-circle, .fa-home, .fa-question-circle, .fa-building {
+        font-size: 26px;
+    }
+}

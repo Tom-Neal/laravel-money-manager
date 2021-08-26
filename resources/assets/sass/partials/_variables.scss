@@ -1,0 +1,14 @@
+$col1: #18222b;
+$col2: #18222b;
+
+$ff1: 'Nunito Sans', sans-serif;
+$ff2: 'Changa One', cursive;
+
+$fs: 14px;
+
+@mixin flex($flex-direction, $align-items, $justify-content) {
+    display: flex;
+    flex-direction: $flex-direction;
+    align-items: $align-items;
+    justify-content: $justify-content;
+}
