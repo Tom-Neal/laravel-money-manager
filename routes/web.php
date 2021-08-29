@@ -17,6 +17,16 @@ Route::group( ['middleware' => 'auth'], function() {
 
     Route::get('home',                              \App\Http\Controllers\HomeController::class)->name('home');
 
+    Route::prefix('client-types')->group(function() {
+        Route::get('/',                             [\App\Http\Controllers\ClientTypeController::class, 'index']);
+        Route::get('create',                        [\App\Http\Controllers\ClientTypeController::class, 'create']);
+        Route::post('/',                            [\App\Http\Controllers\ClientTypeController::class, 'store']);
+        Route::get('show/{clientType}',             [\App\Http\Controllers\ClientTypeController::class, 'show']);
+        Route::get('edit/{clientType}',             [\App\Http\Controllers\ClientTypeController::class, 'edit']);
+        Route::patch('/{clientType}',               [\App\Http\Controllers\ClientTypeController::class, 'update']);
+        Route::delete('/{clientType}',              [\App\Http\Controllers\ClientTypeController::class, 'destroy']);
+    });
+
     Route::get('media/{media}',                     [\App\Http\Controllers\MediaController::class, 'show']);
 
     Route::prefix('users/profile')->group(function() {

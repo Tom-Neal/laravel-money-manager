@@ -17,7 +17,7 @@ class UserProfileTest extends TestCase
     {
         parent::setUp();
         $this->seedDatabase();
-        $this->actingAs();
+        $this->actingAsAdmin();
     }
 
     public function test_get_user_profile_view()
@@ -44,7 +44,7 @@ class UserProfileTest extends TestCase
         $this->seed(UserTableSeeder::class);
     }
 
-    private function actingAs()
+    private function actingAsAdmin()
     {
         $this->be(User::first());
     }
