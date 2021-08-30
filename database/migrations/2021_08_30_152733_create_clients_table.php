@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateClientTypesTable extends Migration
+class CreateClientsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,14 @@ class CreateClientTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('client_types', function (Blueprint $table) {
+        Schema::create('clients', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->text('description')->nullable();
-            $table->string('slug')->nullable();
-            $table->string('icon')->nullable()->default('fa-user-check');
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
+            $table->unsignedBigInteger('client_type_id');
+            $table->foreign('client_type_id')->references('id')->on('client_types')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
@@ -29,6 +31,6 @@ class CreateClientTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('client_types');
+        Schema::dropIfExists('clients');
     }
 }

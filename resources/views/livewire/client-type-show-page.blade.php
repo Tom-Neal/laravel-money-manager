@@ -27,4 +27,41 @@
             </div>
         </div>
     </div>
+    <div class="card card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th class="table_col_width_25">Email</th>
+                            <th class="table_center table_col_width_5">View</th>
+                            <th class="table_center table_col_width_5">Edit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($clients as $client)
+                            <tr>
+                                <td>{{ $client->name }}</td>
+                                <td>{{ $client->email }}</td>
+                                <td class="table_center">
+                                    <a class="btn btn-primary btn-sm" href="{{ url('clients/show', $client) }}">
+                                        <i class="fas fa-eye text-white" aria-hidden="true"></i>
+                                    </a>
+                                </td>
+                                <td class="table_center">
+                                    <a class="btn btn-warning btn-sm" href="{{ url('clients/edit', $client) }}">
+                                        <i class="fas fa-wrench text-white" aria-hidden="true"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                <div class="d-flex justify-content-end">
+                    {{ $clients->links() }}
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

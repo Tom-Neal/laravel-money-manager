@@ -27,6 +27,11 @@ Route::group( ['middleware' => 'auth'], function() {
         Route::delete('/{clientType}',              [\App\Http\Controllers\ClientTypeController::class, 'destroy']);
     });
 
+    Route::prefix('clients')->group(function() {
+        Route::get('show/{client}',                 [\App\Http\Controllers\ClientController::class, 'show']);
+        Route::get('edit/{client}',                 [\App\Http\Controllers\ClientController::class, 'edit']);
+    });
+
     Route::get('media/{media}',                     [\App\Http\Controllers\MediaController::class, 'show']);
 
     Route::prefix('users/profile')->group(function() {

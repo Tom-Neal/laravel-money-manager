@@ -13,4 +13,9 @@ class ClientType extends Model
     protected $table = 'client_types';
     public $timestamps = false;
 
+    public function clients(): HasMany
+    {
+        return $this->hasMany(Client::class);
+    }
+
 }

@@ -22,7 +22,12 @@ class ClientTypeShowPage extends Component
 
     public function render()
     {
-        return view('livewire.client-type-show-page');
+        $clients = $this->clientType
+            ->clients()
+            ->latest()
+            ->paginate(20);
+        return view('livewire.client-type-show-page')
+            ->with(compact('clients'));
     }
 
     public function store()
