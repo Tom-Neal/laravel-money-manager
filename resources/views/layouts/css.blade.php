@@ -4,6 +4,7 @@
     <link href="{{ asset('css/flatpickr-4.6.3/flatpickr.css') }}" rel="stylesheet" >
     <link href="{{ asset('css/fontawesome-5.14.0/css/all.min.css') }}" rel="stylesheet" >
     <link href="{{ asset('css/sweetalert/sweetalert.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/filepond-4.27.0/filepond.css') }}" rel="stylesheet" />
     @stack('css')
     <link href="{{ asset(mix('css/app.css')) }}" rel="stylesheet" />
 @else

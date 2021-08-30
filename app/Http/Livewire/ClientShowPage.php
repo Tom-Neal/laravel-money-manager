@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Client;
+use App\Models\{Client, InvoiceStatus};
 use Livewire\{Component, WithFileUploads};
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -12,10 +12,26 @@ class ClientShowPage extends Component
     use WithFileUploads;
 
     public Client $client;
+    public $invoiceStatuses;
+    public ?int $invoiceTotal = NULL;
+    public ?string $invoiceDateSent = NULL;
+    public ?string $invoiceDatePaid = NULL;
+    public int $invoiceDateStatusId = 1;
     public $files = [];
+
+    public function rules(): array
+    {
+        return [
+            'invoiceTotal'        => ['nullable', 'string'],
+            'invoiceDateSent'     => ['nullable', 'string'],
+            'invoiceDatePaid'     => ['nullable', 'string'],
+            'invoiceDateStatusId' => ['required', 'integer']
+        ];
+    }
 
     public function render()
     {
+        $this->client->load('invoices.invoiceStatus', 'invoices.invoiceItems');
         return view('livewire.client-show-page');
     }
 
@@ -23,6 +39,21 @@ class ClientShowPage extends Component
     {
         $this->invoiceStatuses = InvoiceStatus::all();
         $this->invoiceDateSent = date('Y-m-d', strtotime(NOW()));
+    }
+
+    public function storeInvoice()
+    {
+        $this->client->invoices()->create([
+            'number'            => $this->client->newInvoiceNumber(),
+            'total'             => $this->invoiceTotal,
+            'date_sent'         => $this->invoiceDateSent,
+            'date_paid'         => $this->invoiceDatePaid,
+            'invoice_status_id' => $this->invoiceDateStatusId,
+        ]);
+        $this->reset('invoiceTotal', 'invoiceDateSent', 'invoiceDatePaid', 'invoiceDateStatusId');
+        $this->dispatchBrowserEvent(
+            'notify', ['type' => 'success', 'message' => 'Invoice Added']
+        );
     }
 
     public function storeMedia()

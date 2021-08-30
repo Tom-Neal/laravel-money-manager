@@ -20,5 +20,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(ClientTypeTableSeeder::class);
 
+        $this->call(InvoiceStatusTableSeeder::class);
+
     }
 }

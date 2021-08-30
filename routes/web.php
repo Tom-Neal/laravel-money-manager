@@ -32,6 +32,11 @@ Route::group( ['middleware' => 'auth'], function() {
         Route::get('edit/{client}',                 [\App\Http\Controllers\ClientController::class, 'edit']);
     });
 
+    Route::prefix('invoices')->group(function() {
+        Route::get('/',                             [\App\Http\Controllers\InvoiceController::class, 'index']);
+        Route::get('edit/{invoice}',                [\App\Http\Controllers\InvoiceController::class, 'edit']);
+    });
+
     Route::get('media/{media}',                     [\App\Http\Controllers\MediaController::class, 'show']);
 
     Route::prefix('users/profile')->group(function() {

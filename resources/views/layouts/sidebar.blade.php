@@ -11,6 +11,16 @@
             <i class="fas fa-wrench me-1"></i>
             Update Profile
         </a>
+        @foreach($clientTypes as $clientType)
+            <a href="{{ url('client-types/show', $clientType) }}" class="list-group-item pt-3 pb-3">
+                <i class="fas {{ $clientType->icon }} me-1"></i>
+                {{ $clientType->name }} Clients
+            </a>
+        @endforeach
+        <a href="{{ url('invoices') }}" class="list-group-item pt-3 pb-3">
+            <i class="fas fa-money-check me-1"></i>
+            Invoices
+        </a>
         <a href="{{ url('client-types') }}" class="list-group-item pt-3 pb-3">
             <i class="fas fa-users me-1"></i>
             Client Types
