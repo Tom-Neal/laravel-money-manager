@@ -38,9 +38,11 @@ Route::group( ['middleware' => 'auth'], function() {
     });
 
     Route::get('invoices/download/{invoice}',                       \App\Http\Controllers\InvoiceDownloadController::class);
+    Route::get('invoices/download/tax-year/{year}',                 \App\Http\Controllers\InvoiceDownloadTaxYearController::class);
 
     // Same as above but includes invoice payments as part of the download
     Route::get('invoices/with-payments/download/{invoice}',         \App\Http\Controllers\InvoiceWithPaymentsDownloadController::class);
+    Route::get('invoices/with-payments/download/tax-year/{year}',   \App\Http\Controllers\InvoiceWithPaymentsDownloadTaxYearController::class);
 
     Route::get('media/{media}',                     [\App\Http\Controllers\MediaController::class, 'show']);
 
