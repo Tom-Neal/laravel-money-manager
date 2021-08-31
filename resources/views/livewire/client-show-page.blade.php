@@ -67,6 +67,7 @@
                                 <th class="table_center table_col_width_15">Latest Payment</th>
                                 <th class="table_center table_col_width_10">Total</th>
                                 <th class="table_center table_col_width_15">Status</th>
+                                <th class="table_center table_col_width_5">PDF</th>
                                 <th class="table_center table_col_width_5">Edit</th>
                             </tr>
                         </thead>
@@ -82,6 +83,15 @@
                                         <span class="fw-bold w-50 py-2 badge bg-{{ $invoice->invoiceStatus->colour }}">
                                             {{ $invoice->invoiceStatus->name }}
                                         </span>
+                                    </td>
+                                    <td class="table_center">
+                                        @if($invoice->downloadCheck())
+                                            <a class="btn btn-primary btn-sm" href="{{ url('invoices/download', $invoice) }}">
+                                                <i class="fas fa-download text-white" aria-hidden="true"></i>
+                                            </a>
+                                        @else
+                                            <span>-</span>
+                                        @endif
                                     </td>
                                     <td class="table_center">
                                         <a class="btn btn-warning btn-sm" href="{{ url('invoices/edit', $invoice) }}">

@@ -37,6 +37,11 @@ Route::group( ['middleware' => 'auth'], function() {
         Route::get('edit/{invoice}',                [\App\Http\Controllers\InvoiceController::class, 'edit']);
     });
 
+    Route::get('invoices/download/{invoice}',                       \App\Http\Controllers\InvoiceDownloadController::class);
+
+    // Same as above but includes invoice payments as part of the download
+    Route::get('invoices/with-payments/download/{invoice}',         \App\Http\Controllers\InvoiceWithPaymentsDownloadController::class);
+
     Route::get('media/{media}',                     [\App\Http\Controllers\MediaController::class, 'show']);
 
     Route::prefix('users/profile')->group(function() {

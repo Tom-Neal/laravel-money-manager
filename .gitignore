@@ -15,4 +15,5 @@ yarn-error.log
 /.vscode
 /public/css/app.css
 /public/css/login.css
+/public/css/invoice.css
 /public/js/app.js

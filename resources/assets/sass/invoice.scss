@@ -1,0 +1,118 @@
+@import "partials/variables";
+
+// Generated CSS pasted into Blade view for invoice PDF
+
+html, body {
+    font-size: 16px;
+}
+
+html {
+    font-family: 'Helvetica',  sans-serif;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+h1 {
+    margin-bottom: 0;
+}
+
+.font-small {
+    font-size: 14px;
+}
+
+.green {
+    color: #0c4128;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+.right {
+    text-align: right;
+}
+
+.margin-correct {
+    margin-top: -18px;
+}
+
+.margin-correct-48 {
+    margin-top: -48px;
+}
+
+.margin-correct-70 {
+    margin-top: -70px;
+}
+
+.padding-3 {
+    padding: 3px 0;
+}
+
+.padding-5 {
+    padding: 5px 0;
+}
+
+.padding-10 {
+    padding: 10px 0;
+}
+
+.padding-20 {
+    padding: 20px 0;
+}
+
+.border-bottom {
+    border-bottom: 2px solid $col1;
+}
+
+.border-bottom-light {
+    border-bottom: 1px solid $col1;
+}
+
+#invoice {
+    width: 710px;
+}
+
+#header {
+    text-align: right;
+}
+
+#top {
+    margin-bottom: 30px;
+    #date {
+        text-align: right;
+    }
+}
+
+#middle {
+    margin-bottom: 10px;
+    border-bottom: 2px solid $col1;
+    #customer {
+
+    }
+    #business {
+        #address {
+
+        }
+        #bank {
+
+        }
+    }
+}
+
+#payments {
+    color: red;
+    border: 2px solid red;
+    width: 250px;
+    margin: -150px 0 0 180px;
+    font-weight: bold;
+    padding: 0 10px;
+    position: absolute;
+    background: #FFF;
+    z-index: 10;
+}

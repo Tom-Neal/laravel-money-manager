@@ -83,4 +83,13 @@ class Invoice extends Model
         return true;
     }
 
+    public function downloadCheck(): bool
+    {
+        // Only permit invoice download/export if these conditions are met
+        if (!$this->date_sent || !$this->total || $this->invoiceItems->isEmpty()) {
+            return false;
+        }
+        return true;
+    }
+
 }

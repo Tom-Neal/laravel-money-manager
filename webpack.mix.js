@@ -14,5 +14,6 @@ const mix = require('laravel-mix');
 mix.js('resources/assets/js/app.js', 'public/js').version()
     .sass('resources/assets/sass/app.scss', 'public/css').version()
     .sass('resources/assets/sass/login.scss', 'public/css').version()
+    .sass('resources/assets/sass/invoice.scss', 'public/css').version()
     .disableNotifications()
     .browserSync('http://localhost:81/laravel-money-manager/public');

@@ -8,6 +8,7 @@ use Spatie\MediaLibrary\{HasMedia, InteractsWithMedia};
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Client extends Model implements HasMedia
 {
@@ -25,6 +26,16 @@ class Client extends Model implements HasMedia
     {
         return $this->hasMany(Invoice::class)
             ->latest('date_sent');
+    }
+
+    public function projects(): HasMany
+    {
+        return $this->hasMany(Project::class);
+    }
+
+    public function address(): MorphOne
+    {
+        return $this->morphOne(Address::class, 'addresstable');
     }
 
     public function firstInvoice(): HasOne
