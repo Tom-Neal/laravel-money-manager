@@ -15,7 +15,7 @@ class Client extends Model implements HasMedia
     use InteractsWithMedia, HasFactory;
 
     protected $table = 'clients';
-    protected $with = ['clientType'];
+    protected $with = ['businesses', 'projects', 'clientType'];
 
     public function clientType(): BelongsTo
     {
@@ -26,6 +26,11 @@ class Client extends Model implements HasMedia
     {
         return $this->hasMany(Invoice::class)
             ->latest('date_sent');
+    }
+
+    public function businesses(): HasMany
+    {
+        return $this->hasMany(Business::class);
     }
 
     public function projects(): HasMany

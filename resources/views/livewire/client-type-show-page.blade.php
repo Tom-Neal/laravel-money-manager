@@ -35,6 +35,7 @@
                         <tr>
                             <th>Name</th>
                             <th class="table_col_width_25">Email</th>
+                            <th class="table_col_width_40">Businesses</th>
                             <th class="table_center table_col_width_5">View</th>
                             <th class="table_center table_col_width_5">Edit</th>
                         </tr>
@@ -44,6 +45,11 @@
                             <tr>
                                 <td>{{ $client->name }}</td>
                                 <td>{{ $client->email }}</td>
+                                <td>
+                                    @foreach($client->businesses as $business)
+                                        {{ $business->name }}@if(!$loop->last),@endif
+                                    @endforeach
+                                </td>
                                 <td class="table_center">
                                     <a class="btn btn-primary btn-sm" href="{{ url('clients/show', $client) }}">
                                         <i class="fas fa-eye text-white" aria-hidden="true"></i>
