@@ -6,5 +6,6 @@
     <script src="{{ asset('js/filepond-4.27.0/filepond.js') }}"></script>
     <script src="{{ asset('js/filepond-4.27.0/filepond-plugin-file-validate-size.js') }}"></script>
     <script src="{{ asset(mix('js/app.js')) }}"></script>
+    <x-notification></x-notification>
     @stack('js')
 @endif

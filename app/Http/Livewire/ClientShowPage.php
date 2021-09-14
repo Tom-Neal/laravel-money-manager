@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\{Client, InvoiceStatus};
+use App\Models\{Client, Comment, InvoiceStatus};
 use Livewire\{Component, WithFileUploads};
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -17,6 +17,7 @@ class ClientShowPage extends Component
     public ?string $invoiceDateSent = NULL;
     public ?string $invoiceDatePaid = NULL;
     public int $invoiceDateStatusId = 1;
+    public string $commentDescription = '';
     public $files = [];
 
     public function rules(): array
@@ -25,13 +26,14 @@ class ClientShowPage extends Component
             'invoiceTotal'        => ['nullable', 'string'],
             'invoiceDateSent'     => ['nullable', 'string'],
             'invoiceDatePaid'     => ['nullable', 'string'],
-            'invoiceDateStatusId' => ['required', 'integer']
+            'invoiceDateStatusId' => ['required', 'integer'],
+            'commentDescription'  => ['required', 'string'],
         ];
     }
 
     public function render()
     {
-        $this->client->load('invoices.invoiceStatus', 'invoices.invoiceItems');
+        $this->client->load('invoices.invoiceStatus', 'invoices.invoiceItems', 'comments');
         return view('livewire.client-show-page');
     }
 
@@ -84,6 +86,26 @@ class ClientShowPage extends Component
         $media->delete();
         $this->dispatchBrowserEvent(
             'notify', ['type' => 'danger', 'message' => 'File Deleted']
+        );
+    }
+
+    public function storeComment()
+    {
+        $this->validateOnly('commentDescription');
+        $this->client->comments()->create([
+            'description' => $this->commentDescription
+        ]);
+        $this->commentDescription = '';
+        $this->dispatchBrowserEvent(
+            'notify', ['type' => 'success', 'message' => 'Comment Added']
+        );
+    }
+
+    public function destroyComment(Comment $comment)
+    {
+        $comment->delete();
+        $this->dispatchBrowserEvent(
+            'notify', ['type' => 'danger', 'message' => 'Comment Removed']
         );
     }
 

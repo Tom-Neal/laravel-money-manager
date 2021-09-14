@@ -1,6 +1,5 @@
 <div id="page" class="container">
     <x-session-message></x-session-message>
-    <x-notification></x-notification>
     <div class="row mb-3 align-items-end">
         <div class="col">
             <h1>{{ $client->name }}</h1>
@@ -148,4 +147,45 @@
         @endif
     </div>
     <x-filepond :files="$files"></x-filepond>
+    <div class="card card-body mb-3">
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Comments ({{ $client->comments->count() }})</h3>
+            </div>
+            <div class="col-md-12 mb-3">
+                @forelse($client->comments as $comment)
+                    <div class="border mb-3 mt-3 rounded">
+                        <div class="d-flex flex-column comment-section">
+                            <div class="p-2 bg-light">
+                                <div class="d-flex flex-row justify-content-between align-items-start">
+                                    <div class="d-flex flex-column justify-content-start ml-2">
+                                        <span class="date text-black-50">{{ date('H:i d/m/Y', strtotime($comment->created_at)) }}</span>
+                                    </div>
+                                    <button class="btn btn-outline-danger btn-sm" wire:click="destroyComment({{ $comment->id }})">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                                <div class="mt-2">
+                                    <?php echo $comment->description; ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @empty
+                    <span class="fst-italic">There are no comments for this client yet.</span>
+                @endforelse
+            </div>
+            <x-error></x-error>
+            <div class="col-md-12">
+                <label>New Comment</label>
+                <textarea class="form-control mb-3" rows="3" wire:model="commentDescription"></textarea>
+                <div class="text-end">
+                    <button class="btn btn-outline-success" wire:click="storeComment()">
+                        Add Comment
+                        <i class="fas fa-comment ms-1"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

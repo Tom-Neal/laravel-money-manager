@@ -8,6 +8,7 @@ use Spatie\MediaLibrary\{HasMedia, InteractsWithMedia};
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Client extends Model implements HasMedia
@@ -28,6 +29,19 @@ class Client extends Model implements HasMedia
             ->latest('date_sent');
     }
 
+    public function firstInvoice(): HasOne
+    {
+        return $this->hasOne(Invoice::class)
+            ->oldestOfMany();
+    }
+
+    public function lastInvoice(): HasOne
+    {
+        return $this->hasOne(Invoice::class)
+            ->latestOfMany()
+            ->withDefault();
+    }
+
     public function businesses(): HasMany
     {
         return $this->hasMany(Business::class);
@@ -43,17 +57,10 @@ class Client extends Model implements HasMedia
         return $this->morphOne(Address::class, 'addresstable');
     }
 
-    public function firstInvoice(): HasOne
+    public function comments(): MorphMany
     {
-        return $this->hasOne(Invoice::class)
-            ->oldestOfMany();
-    }
-
-    public function lastInvoice(): HasOne
-    {
-        return $this->hasOne(Invoice::class)
-            ->latestOfMany()
-            ->withDefault();
+        return $this->morphMany(Comment::class, 'commenttable')
+            ->latest();
     }
 
     public function newInvoiceNumber(): string

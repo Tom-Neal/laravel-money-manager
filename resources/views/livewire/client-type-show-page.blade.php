@@ -1,6 +1,5 @@
 <div id="page" class="container">
     <x-session-message></x-session-message>
-    <x-notification></x-notification>
     <div class="row">
         <div class="col-md-12">
             <h1>{{ $clientType->name }} Clients</h1>

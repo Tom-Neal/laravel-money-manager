@@ -1,6 +1,5 @@
 <div id="page" class="container">
     <x-session-message></x-session-message>
-    <x-notification></x-notification>
     <div class="row mb-3 align-items-end">
         <div class="col">
             <h1>Invoice {{ $invoice->number_formatted }}</h1>

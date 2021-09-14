@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasMany, HasOne, HasOneThrough};
+use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasMany, HasOne, HasOneThrough, MorphMany};
 
 class Invoice extends Model
 {
@@ -49,6 +49,12 @@ class Invoice extends Model
     public function project(): HasOneThrough
     {
         return $this->hasOneThrough(InvoiceProject::class, 'invoice_project');
+    }
+
+    public function comments(): MorphMany
+    {
+        return $this->morphMany(Comment::class, 'commenttable')
+            ->latest();
     }
 
     public function scopePaid($query)

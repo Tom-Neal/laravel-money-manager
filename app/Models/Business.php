@@ -23,4 +23,10 @@ class Business extends Model implements HasMedia
         return $this->morphOne(Address::class, 'addresstable');
     }
 
+    public function comments(): MorphMany
+    {
+        return $this->morphMany(Comment::class, 'commenttable')
+            ->latest();
+    }
+
 }
