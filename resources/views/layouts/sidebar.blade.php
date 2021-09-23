@@ -21,6 +21,10 @@
             <i class="fas fa-money-check me-1"></i>
             Invoices
         </a>
+        <a href="{{ url('expenses') }}" class="list-group-item pt-3 pb-3">
+            <i class="fas fa-money-bill me-1"></i>
+            Expenses
+        </a>
         <a href="{{ url('client-types') }}" class="list-group-item pt-3 pb-3">
             <i class="fas fa-users me-1"></i>
             Client Types
