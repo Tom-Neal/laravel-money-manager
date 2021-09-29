@@ -35,6 +35,7 @@
                             <th>Name</th>
                             <th class="table_col_width_25">Email</th>
                             <th class="table_col_width_40">Businesses</th>
+                            <th class="table_center table_col_width_15">Latest Invoice</th>
                             <th class="table_center table_col_width_5">View</th>
                             <th class="table_center table_col_width_5">Edit</th>
                         </tr>
@@ -48,6 +49,9 @@
                                     @foreach($client->businesses as $business)
                                         {{ $business->name }}@if(!$loop->last),@endif
                                     @endforeach
+                                </td>
+                                <td class="table_center">
+                                    {{ $client->lastInvoice->date_paid }}
                                 </td>
                                 <td class="table_center">
                                     <a class="btn btn-primary btn-sm" href="{{ url('clients/show', $client) }}">

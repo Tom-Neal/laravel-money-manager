@@ -44,6 +44,13 @@ Route::group( ['middleware' => 'auth'], function() {
     Route::get('invoices/with-payments/download/{invoice}',         \App\Http\Controllers\InvoiceWithPaymentsDownloadController::class);
     Route::get('invoices/with-payments/download/tax-year/{year}',   \App\Http\Controllers\InvoiceWithPaymentsDownloadTaxYearController::class);
 
+    Route::prefix('expenses')->group(function() {
+        Route::get('/',                             [\App\Http\Controllers\ExpenseController::class, 'index']);
+        Route::get('edit/{expense}',                [\App\Http\Controllers\ExpenseController::class, 'edit']);
+        Route::patch('/{expense}',                  [\App\Http\Controllers\ExpenseController::class, 'update']);
+        Route::delete('/{expense}',                 [\App\Http\Controllers\ExpenseController::class, 'destroy']);
+    });
+
     Route::get('media/{media}',                     [\App\Http\Controllers\MediaController::class, 'show']);
 
     Route::prefix('users/profile')->group(function() {

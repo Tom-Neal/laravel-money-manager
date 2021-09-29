@@ -25,14 +25,16 @@ class UserProfileController extends Controller
         /*
          * Updates a user's email and/or password
          */
-        request()->validate([
-            'email' => ['required', 'email', 'max:100', 'unique:users,email,' . $user->id],
-        ]);
-        $user->update([
-            'email'    => request()['email'],
-            'password' => bcrypt(request()['password'])
-        ]);
-        return back()->with('message', 'Profile Updated');
+        if ((int)auth()->user()->id === (int)$user->id) {
+            request()->validate([
+                'email' => ['required', 'email', 'max:100', 'unique:users,email,' . $user->id],
+            ]);
+            $user->update([
+                'email'    => request()['email'],
+                'password' => bcrypt(request()['password'])
+            ]);
+            return back()->with('message', 'Profile Updated');
+        }
     }
 
 }

@@ -34,6 +34,7 @@ class ClientTypeController extends Controller
 
     public function show(ClientType $clientType)
     {
+        $clientType->load('clients.lastInvoice');
         return view('client_types.show')
             ->with(compact('clientType'));
     }
