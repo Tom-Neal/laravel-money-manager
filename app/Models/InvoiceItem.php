@@ -38,4 +38,13 @@ class InvoiceItem extends Model
         return "£" . substr($this->price, 0, -2) . "." . substr($this->price, -2);
     }
 
+    public function sendEmailAsRenewalRequired()
+    {
+        $this->update([
+            'renewal_required_email_sent' => NOW()
+        ]);
+        Mail::to(Setting::first()->email)
+            ->send(new InvoiceItemRenewalRequiredMail($this));
+    }
+
 }

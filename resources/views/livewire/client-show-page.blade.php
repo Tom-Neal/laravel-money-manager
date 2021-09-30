@@ -67,6 +67,7 @@
                                 <th class="table_center table_col_width_10">Total</th>
                                 <th class="table_center table_col_width_15">Status</th>
                                 <th class="table_center table_col_width_5">PDF</th>
+                                <th class="table_center table_col_width_5">Send</th>
                                 <th class="table_center table_col_width_5">Edit</th>
                             </tr>
                         </thead>
@@ -87,6 +88,15 @@
                                         @if($invoice->downloadCheck())
                                             <a class="btn btn-primary btn-sm" href="{{ url('invoices/download', $invoice) }}">
                                                 <i class="fas fa-download text-white" aria-hidden="true"></i>
+                                            </a>
+                                        @else
+                                            <span>-</span>
+                                        @endif
+                                    </td>
+                                    <td class="table_center">
+                                        @if($invoice->downloadCheck() && $client->email)
+                                            <a class="btn btn-info btn-sm" href="{{ url('invoices/mails', $invoice) }}">
+                                                <i class="fas fa-envelope text-white" aria-hidden="true"></i>
                                             </a>
                                         @else
                                             <span>-</span>

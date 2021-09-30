@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use App\Mail\InvoiceClientMail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasMany, HasOne, HasOneThrough, MorphMany};
+use Illuminate\Support\Facades\Mail;
 
 class Invoice extends Model
 {
@@ -72,9 +74,28 @@ class Invoice extends Model
         return "£" . substr(round($this->total), 0, -2) . "." . substr(round($this->total), -2);
     }
 
+    public function getFilePdfNameAttribute(): string
+    {
+        return
+            str_replace(
+                ' ',
+                '_',
+                $this->client->name . "_$this->number" . "_" . date('d_m_Y', strtotime($this->date_sent)) . ".pdf"
+            );
+    }
+
     public function isPaid(): bool
     {
         return (int)$this->invoice_status_id === InvoiceStatus::PAID;
+    }
+
+    public function sendEmailToClient(string $text)
+    {
+        $this->update([
+            'email_sent' => NOW()
+        ]);
+        Mail::to($this->client->email, $this->client->name)
+            ->send(new InvoiceClientMail($this, $text));
     }
 
     public function invoicePaymentTotalCheck(): bool

@@ -37,6 +37,11 @@ Route::group( ['middleware' => 'auth'], function() {
         Route::get('edit/{invoice}',                [\App\Http\Controllers\InvoiceController::class, 'edit']);
     });
 
+    Route::prefix('invoices/mails')->group(function() {
+        Route::get('/{invoice}',                    [\App\Http\Controllers\InvoiceMailController::class, 'create']);
+        Route::post('/{invoice}',                   [\App\Http\Controllers\InvoiceMailController::class, 'store']);
+    });
+
     Route::get('invoices/download/{invoice}',                       \App\Http\Controllers\InvoiceDownloadController::class);
     Route::get('invoices/download/tax-year/{year}',                 \App\Http\Controllers\InvoiceDownloadTaxYearController::class);
 
