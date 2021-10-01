@@ -1,10 +1,6 @@
 $col1: #18222b;
-$col2: #18222b;
 
-$ff1: 'Nunito Sans', sans-serif;
-$ff2: 'Changa One', cursive;
-
-$fs: 14px;
+$ff1: 'Manrope', sans-serif;
 
 @mixin flex($flex-direction, $align-items, $justify-content) {
     display: flex;

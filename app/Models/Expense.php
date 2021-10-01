@@ -10,6 +10,7 @@ class Expense extends Model
     use HasFactory;
 
     protected $table = 'expenses';
+    protected $appends = ['price_formatted', 'price_with_vat_formatted'];
 
     public function getPriceFormattedAttribute(): string
     {

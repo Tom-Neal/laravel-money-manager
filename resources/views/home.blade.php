@@ -26,7 +26,7 @@
                                 <div>{{ $invoiceItem->description }}</div>
                                 <div class="d-flex align-items-center">
                                     <div>{{ date('d/m/Y', strtotime($invoiceItem->renewal_required)) }}</div>
-                                    <a class="btn btn-primary btn-sm ms-2" href="{{ url('clients/show', $invoiceItem->invoice->client) }}">
+                                    <a class="btn btn-outline-primary btn-sm ms-2" href="{{ url('clients/show', $invoiceItem->invoice->client) }}">
                                         View Client
                                         <i class="fas fa-eye ms-1"></i>
                                     </a>
@@ -45,7 +45,7 @@
                     </div>
                     @foreach($recentInvoices as $recentInvoice)
                         <div class="col-md-3">
-                            <a class="btn btn-primary w-100" href="{{ url('invoices/edit', $recentInvoice) }}">
+                            <a class="btn btn-outline-primary w-100" href="{{ url('invoices/edit', $recentInvoice) }}">
                                 {{ $recentInvoice->client->name }}<br />
                                 Total: {{ $recentInvoice->total_formatted }}<br />
                                 Status: {{ $recentInvoice->invoiceStatus->name }}
@@ -65,11 +65,7 @@
                         <div class="d-flex justify-content-between border-top py-2">
                             <div>{{ $key }}</div>
                             <div>
-                                @if($invoices->sum('total'))
-                                    {{ "£".substr($invoices->sum('total'), 0, -2).".".substr($invoices->sum('total'), -2) }}
-                                @else
-                                    £0.00
-                                @endif
+                                {{ CurrencyHelper::getFormattedValue($invoices->sum('total')) }}
                             </div>
                         </div>
                     @endforeach
@@ -86,11 +82,7 @@
                         <div class="d-flex justify-content-between border-top py-2">
                             <div>{{ $key }}</div>
                             <div>
-                                @if($expenses->sum('price'))
-                                    {{ "£".substr($expenses->sum('price'), 0, -2).".".substr($expenses->sum('price'), -2) }}
-                                @else
-                                    £0.00
-                                @endif
+                                {{ CurrencyHelper::getFormattedValue($expenses->sum('price')) }}
                             </div>
                         </div>
                     @endforeach

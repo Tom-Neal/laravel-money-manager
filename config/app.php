@@ -231,6 +231,9 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        'CurrencyHelper' => App\Helpers\CurrencyHelper::class,
+        'DateHelper' => App\Helpers\DateHelper::class,
+
     ],
 
 ];
