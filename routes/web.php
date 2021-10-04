@@ -56,6 +56,11 @@ Route::group( ['middleware' => 'auth'], function() {
         Route::delete('/{expense}',                 [\App\Http\Controllers\ExpenseController::class, 'destroy']);
     });
 
+    Route::prefix('exports')->group(function() {
+        Route::get('invoices',                      [\App\Http\Controllers\ExportController::class, 'invoice']);
+        Route::get('expenses',                      [\App\Http\Controllers\ExportController::class, 'expense']);
+    });
+
     Route::get('media/{media}',                     [\App\Http\Controllers\MediaController::class, 'show']);
 
     Route::prefix('users/profile')->group(function() {

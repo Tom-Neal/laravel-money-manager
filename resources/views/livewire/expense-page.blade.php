@@ -6,7 +6,7 @@
             <h1>Expenses</h1>
         </div>
     </div>
-    <div class="row mb-3">
+    <div class="row mb-2">
         <div class="col-md-12">
             <h3>Add New Expense</h3>
         </div>
@@ -35,6 +35,10 @@
         </div>
         <div class="col-md-6 d-flex justify-content-end align-items-end mt-3">
             <span>Current Tax Year Expenses: <span class="fw-bold">{{ $currentTaxYearTotal }}</span></span>
+            <a class="btn btn-primary ms-3" href="{{ url('exports/expenses') }}">
+                Export All
+                <i class="fas fa-file-excel ms-1"></i>
+            </a>
         </div>
     </div>
     <div class="card card-body">

@@ -36,6 +36,14 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12 d-flex justify-content-end align-items-end mb-2">
+            <a class="btn btn-primary" href="{{ url('exports/invoices') }}">
+                Export All
+                <i class="fas fa-file-excel ms-1"></i>
+            </a>
+        </div>
+    </div>
     <div class="card card-body">
         <div class="row">
             <div class="col-md-12">
@@ -91,6 +99,9 @@
                             @endforeach
                         </tbody>
                     </table>
+                </div>
+                <div class="d-flex justify-content-end">
+                    {{ $invoices->links() }}
                 </div>
             </div>
         </div>
