@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\ClientType;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -32,7 +33,13 @@ class AppServiceProvider extends ServiceProvider
         Paginator::useBootstrap();
 
         try {
-            view()->share('clientTypes', ClientType::all());
+            if(config('app.env') === 'testing') {
+                View::composer('*', function ($view) {
+                    $view->with('clientTypes', ClientType::all());
+                });
+            } else {
+                view()->share('clientTypes', ClientType::all());
+            }
         } catch (\Exception $ex) {
             report($ex);
         }

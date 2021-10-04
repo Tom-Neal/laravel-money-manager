@@ -10,6 +10,7 @@ class InvoicePayment extends Model
     use HasFactory;
 
     protected $table = 'invoice_payments';
+    protected $touches = ['invoice'];
 
     public function getTotalFormattedAttribute(): string
     {

@@ -52,6 +52,10 @@
                 margin-top: -70px;
             }
 
+            .margin-correct-100 {
+                margin-top: -100px;
+            }
+
             .padding-3 {
                 padding: 3px 0;
             }
@@ -145,7 +149,7 @@
                         <div class="padding-3 font-small">{{ $invoice->client->address->postcode }}</div>
                     @endif
                 </div>
-                <div id="business" class="padding-10 right margin-correct-70">
+                <div id="business" class="padding-10 right margin-correct-100">
                     <div id="address">
                         <div class="underline padding-3 green">Details</div>
                         <div class="padding-3 font-small">{{ $settings->name }}</div>

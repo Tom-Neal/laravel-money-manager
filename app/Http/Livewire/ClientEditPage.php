@@ -43,11 +43,9 @@ class ClientEditPage extends Component
         );
     }
 
-
     public function updateAddress($propertyName)
     {
         $this->validateOnly($propertyName);
-//        dd($this->client->address);
         $this->client->address->save();
         $this->dispatchBrowserEvent(
             'notify', ['type' => 'success', 'message' => 'Client address updated']

@@ -64,7 +64,7 @@ class ClientTypeTest extends TestCase
         $this->assertDatabaseHas('client_types', $attributes);
     }
 
-    public function test_delete_client_category()
+    public function test_delete_client_type()
     {
         $clientType = ClientType::factory()->create();
         $this->delete('/client-types/' . $clientType->id);

@@ -83,9 +83,11 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-3">
-            <button class="btn btn-danger w-100" wire:click="destroy()">Delete</button>
+    @if($client->invoices_count === 0)
+        <div class="row">
+            <div class="col-md-3">
+                <button class="btn btn-danger w-100" wire:click="destroy()">Delete</button>
+            </div>
         </div>
-    </div>
+    @endif
 </div>

@@ -16,7 +16,7 @@ class ExpenseTaxYearService
         $expenseYears = array();
         for ($i = 0; $i < $yearCount; $i++) {
             $expenseYears["$year-" . ($year + 1)] =
-                Expense::whereBetween('date_incurred', ["$year-04-06", ($year + 1) . "-04-05"])->get();
+                Expense::whereBetween('date_incurred', ["$year-04-06", ($year + 1) . "-04-06"])->get();
             $year--;
         }
         return $expenseYears;

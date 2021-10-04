@@ -20,7 +20,7 @@ class InvoiceTaxYearService
         $year = $year ?? DateHelper::getCurrentTaxYear();
         $invoiceYears = array();
         for ($i = 0; $i < $yearCount; $i++) {
-            $invoices = Invoice::query()->whereBetween('date_paid', ["$year-04-06", ($year + 1) . "-04-05"]);
+            $invoices = Invoice::query()->whereBetween('date_paid', ["$year-04-06", ($year + 1) . "-04-06"]);
             // Scope to paid if needed
             if ($paid) $invoices = $invoices->paid();
             $invoiceYears["$year-" . ($year + 1)] = $invoices->get();

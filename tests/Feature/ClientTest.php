@@ -3,8 +3,7 @@
 namespace Tests\Feature;
 
 use App\Http\Livewire\ClientShowPage;
-use App\Models\Client;
-use App\Models\User;
+use App\Models\{Client, InvoiceStatus, User};
 use Database\Seeders\{
     ClientTypeTableSeeder,
     InvoiceStatusTableSeeder,
@@ -31,8 +30,24 @@ class ClientTest extends TestCase
     public function test_client_show_view()
     {
         $client = Client::factory()->create();
+        $this->assertDatabaseCount('clients', 1);
         $response = $this->get('/clients/show/' . $client->id);
+        $response->assertOk();
         $response->assertSeeLivewire(ClientShowPage::class);
+    }
+
+    public function test_client_store_invoice()
+    {
+        $client = Client::factory()->create();
+        Livewire::test(ClientShowPage::class, [
+            'client' => $client
+        ])
+            ->call('storeInvoice', [
+                'total'             => rand(0, 100000),
+                'date_sent'         => '2021-10-01',
+                'invoice_status_id' => InvoiceStatus::CREATED,
+            ]);
+        $this->assertDatabaseCount('invoices', 1);
     }
 
     private function seedDatabase()

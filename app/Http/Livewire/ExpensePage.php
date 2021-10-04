@@ -54,7 +54,7 @@ class ExpensePage extends Component
     public function getCurrentTaxYearTotal(): string
     {
         $currentTaxYear = DateHelper::getCurrentTaxYear();
-        return '£' . round(Expense::whereBetween('date_incurred', ["$currentTaxYear-04-06", ($currentTaxYear + 1) . '-04-05'])->sum('price') / 100, 2);
+        return '£' . round(Expense::whereBetween('date_incurred', ["$currentTaxYear-04-06", ($currentTaxYear + 1) . '-04-06'])->sum('price') / 100, 2);
     }
 
     public function getCurrentTaxYear($expenses): string
