@@ -53,67 +53,10 @@
     <div class="card card-body mb-3">
         <div class="row">
             <div class="col-md-12">
-                <h3>Invoices ({{ $client->invoices->count() }})</h3>
+                <h3>Invoices ({{ $client->invoices_count }})</h3>
             </div>
             <div class="col-md-12">
-                @if($client->invoices->isNotEmpty())
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th class="table_center table_col_width_5">Number</th>
-                                <th>First Item</th>
-                                <th class="table_center table_col_width_15">Date Sent</th>
-                                <th class="table_center table_col_width_15">Latest Payment</th>
-                                <th class="table_center table_col_width_10">Total</th>
-                                <th class="table_center table_col_width_15">Status</th>
-                                <th class="table_center table_col_width_5">PDF</th>
-                                <th class="table_center table_col_width_5">Send</th>
-                                <th class="table_center table_col_width_5">Edit</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($client->invoices as $invoice)
-                                <tr>
-                                    <td class="table_center">{{ $invoice->number }}</td>
-                                    <td>{{ $invoice->firstInvoiceItem->description ?? '' }}</td>
-                                    <td class="table_center">{{ $invoice->date_sent }}</td>
-                                    <td class="table_center">{{ $invoice->lastPayment->date_paid ?? '' }}</td>
-                                    <td class="table_center">{{ $invoice->total_formatted }}</td>
-                                    <td class="table_center">
-                                        <span class="fw-bold w-50 py-2 badge bg-{{ $invoice->invoiceStatus->colour }}">
-                                            {{ $invoice->invoiceStatus->name }}
-                                        </span>
-                                    </td>
-                                    <td class="table_center">
-                                        @if($invoice->downloadCheck())
-                                            <a class="btn btn-primary btn-sm" href="{{ url('invoices/download', $invoice) }}">
-                                                <i class="fas fa-download text-white" aria-hidden="true"></i>
-                                            </a>
-                                        @else
-                                            <span>-</span>
-                                        @endif
-                                    </td>
-                                    <td class="table_center">
-                                        @if($invoice->downloadCheck() && $client->email)
-                                            <a class="btn btn-info btn-sm" href="{{ url('invoices/mails', $invoice) }}">
-                                                <i class="fas fa-envelope text-white" aria-hidden="true"></i>
-                                            </a>
-                                        @else
-                                            <span>-</span>
-                                        @endif
-                                    </td>
-                                    <td class="table_center">
-                                        <a class="btn btn-warning btn-sm" href="{{ url('invoices/edit', $invoice) }}">
-                                            <i class="fas fa-wrench text-white" aria-hidden="true"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                @else
-                    <span class="fst-italic">There are no invoices yet.</span>
-                @endif
+                @livewire('client-invoice-table-row-component', ['client' => $client])
             </div>
         </div>
     </div>

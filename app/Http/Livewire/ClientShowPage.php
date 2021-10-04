@@ -53,6 +53,7 @@ class ClientShowPage extends Component
             'invoice_status_id' => $this->invoiceDateStatusId,
         ]);
         $this->reset('invoiceTotal', 'invoiceDateSent', 'invoiceDatePaid', 'invoiceDateStatusId');
+        $this->emit('storeInvoice');
         $this->dispatchBrowserEvent(
             'notify', ['type' => 'success', 'message' => 'Invoice Added']
         );
