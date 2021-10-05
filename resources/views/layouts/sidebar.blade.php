@@ -7,7 +7,7 @@
             <i class="fas fa-home me-1"></i>
             Home
         </a>
-        <a href="{{ url('users/profile', auth()->user()) }}" class="list-group-item pt-3 pb-3">
+        <a href="{{ url('users/profile') }}" class="list-group-item pt-3 pb-3">
             <i class="fas fa-wrench me-1"></i>
             Update Profile
         </a>

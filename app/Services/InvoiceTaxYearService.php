@@ -13,7 +13,7 @@ class InvoiceTaxYearService
 
     public const FONT = 'Helvetica';
 
-    public function groupTogether(?int $year = NULL, int $yearCount = 5, bool $paid = false): array
+    public function groupTogether(?int $year = NULL, int $yearCount = 5, bool $paid = true): array
     {
         // If year is provided, return invoices for that year,
         // otherwise, return most recent year
@@ -21,9 +21,9 @@ class InvoiceTaxYearService
         $invoiceYears = array();
         for ($i = 0; $i < $yearCount; $i++) {
             $invoices = Invoice::query()->whereBetween('date_paid', ["$year-04-06", ($year + 1) . "-04-06"]);
-            // Scope to paid if needed
+            // Scope to paid if needed (date_paid may be set but has been refunded?)
             if ($paid) $invoices = $invoices->paid();
-            $invoiceYears["$year-" . ($year + 1)] = $invoices->get();
+            $invoiceYears["$year-" . ($year + 1)] = $invoices->with('client', 'invoiceItems')->get();
             $year--;
         }
         return $invoiceYears;
@@ -48,7 +48,7 @@ class InvoiceTaxYearService
         $zipFileName = 'invoices-' . $year . '.zip';
         $zip = new Filesystem(new ZipArchiveAdapter($zipFileName));
 
-        $invoicesYear = $this->groupTogether($year, 1, true);
+        $invoicesYear = $this->groupTogether($year, 1);
 
         foreach ($invoicesYear as $invoices) {
             // Include default txt file to prevent zip file creation failure for now

@@ -53,7 +53,7 @@
     <div class="card card-body mb-3">
         <div class="row">
             <div class="col-md-12">
-                <h3>Invoices ({{ $client->invoices_count }})</h3>
+                <h3>Invoices</h3>
             </div>
             <div class="col-md-12">
                 @livewire('client-invoice-table-row-component', ['client' => $client])
@@ -63,7 +63,7 @@
     <div class="card card-body mb-3">
         <div class="row">
             <div class="col-md-12">
-                <h3>Files ({{ $client->media->count() }})</h3>
+                <h3>Files</h3>
             </div>
         </div>
         @if($client->media->isNotEmpty())
@@ -103,7 +103,7 @@
     <div class="card card-body mb-3">
         <div class="row">
             <div class="col-md-12">
-                <h3>Comments ({{ $client->comments->count() }})</h3>
+                <h3>Comments</h3>
             </div>
             <div class="col-md-12 mb-3">
                 @forelse($client->comments as $comment)

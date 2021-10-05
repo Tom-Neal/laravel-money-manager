@@ -64,8 +64,8 @@ Route::group( ['middleware' => 'auth'], function() {
     Route::get('media/{media}',                     [\App\Http\Controllers\MediaController::class, 'show']);
 
     Route::prefix('users/profile')->group(function() {
-        Route::get('/{user}',                       [\App\Http\Controllers\UserProfileController::class, 'show']);
-        Route::patch('/{user}',                     [\App\Http\Controllers\UserProfileController::class, 'update']);
+        Route::get('/',                             [\App\Http\Controllers\UserProfileController::class, 'show']);
+        Route::patch('/',                           [\App\Http\Controllers\UserProfileController::class, 'update']);
     });
 
     Route::group(['prefix'=>'users/tfa'],function () {

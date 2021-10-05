@@ -1,4 +1,9 @@
 <td class="table_center">{{ $row->number }}</td>
+@if(!isset($client))
+    <td>
+        {{ $row->client->name ?? $row->business->name ?? '' }}
+    </td>
+@endif
 <td>{{ $row->firstInvoiceItem->description ?? '' }}</td>
 <td class="table_center">{{ $row->date_sent }}</td>
 <td class="table_center">{{ $row->lastPayment->date_paid ?? '' }}</td>
@@ -17,15 +22,17 @@
         <span>-</span>
     @endif
 </td>
-<td class="table_center">
-    @if($row->downloadCheck() && $client->email)
-        <a class="btn btn-info btn-sm" href="{{ url('invoices/mails', $row) }}">
-            <i class="fas fa-envelope text-white" aria-hidden="true"></i>
-        </a>
-    @else
-        <span>-</span>
-    @endif
-</td>
+@if(isset($client))
+    <td class="table_center">
+        @if($row->downloadCheck() && $client->email)
+            <a class="btn btn-info btn-sm" href="{{ url('invoices/mails', $row) }}">
+                <i class="fas fa-envelope text-white" aria-hidden="true"></i>
+            </a>
+        @else
+            <span>-</span>
+        @endif
+    </td>
+@endif
 <td class="table_center">
     <a class="btn btn-warning btn-sm" href="{{ url('invoices/edit', $row) }}">
         <i class="fas fa-wrench text-white" aria-hidden="true"></i>

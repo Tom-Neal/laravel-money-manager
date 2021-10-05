@@ -22,7 +22,7 @@ class UserProfileTest extends TestCase
 
     public function test_get_user_profile_view()
     {
-        $response = $this->get('/users/profile/1');
+        $response = $this->get('/users/profile');
         $response->assertOk();
     }
 
@@ -33,7 +33,7 @@ class UserProfileTest extends TestCase
             'password'              => 'newPassword99',
             'password_confirmation' => 'newPassword99',
         ];
-        $response = $this->patch('/users/profile/1', $attributes);
+        $response = $this->patch('/users/profile', $attributes);
         $response->assertStatus(302);
         $this->assertDatabaseHas('users', ['email' => $attributes['email']]);
     }

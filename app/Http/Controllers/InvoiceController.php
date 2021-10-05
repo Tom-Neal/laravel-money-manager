@@ -11,11 +11,7 @@ class InvoiceController extends Controller
     public function index()
     {
         $year = DateHelper::getCurrentTaxYear();
-        $invoices = Invoice::query()
-            ->with('client', 'invoiceStatus', 'invoiceItems')
-            ->latest('date_sent')
-            ->paginate(20);
-        return view('invoices.index')->with(compact('year', 'invoices'));
+        return view('invoices.index')->with(compact('year'));
     }
 
     public function edit(Invoice $invoice)

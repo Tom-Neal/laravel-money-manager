@@ -16,7 +16,7 @@ class Client extends Model implements HasMedia
     use InteractsWithMedia, HasFactory;
 
     protected $table = 'clients';
-    protected $with = ['businesses', 'projects', 'clientType'];
+    protected $with = ['address', 'businesses', 'projects', 'clientType'];
     protected $withCount = ['invoices'];
 
     public function clientType(): BelongsTo

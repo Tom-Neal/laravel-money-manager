@@ -2,9 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Http\Livewire\InvoicePage;
-use App\Models\Invoice;
-use App\Models\User;
+use App\Http\Livewire\{InvoicePage, InvoiceTableRowComponent};
+use App\Models\{Invoice, User};
 use Database\Seeders\{
     ClientTypeTableSeeder,
     InvoiceStatusTableSeeder,
@@ -32,6 +31,7 @@ class InvoiceTest extends TestCase
     {
         $response = $this->get('/invoices');
         $response->assertOk();
+        $response->assertSeeLivewire(InvoiceTableRowComponent::class);
     }
 
     public function test_get_invoice_edit_view()

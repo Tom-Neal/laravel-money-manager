@@ -12,7 +12,7 @@
         </div>
     </div>
     <div class="card card-body p-4 mb-3">
-        <form class="row" method="POST" action="{{ url('users/profile', auth()->user()->id) }}">
+        <form class="row" method="POST" action="{{ url('users/profile') }}">
             @method('PATCH')
             @csrf
             <x-error></x-error>

@@ -2,18 +2,16 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\{Client, Invoice};
+use App\Models\Invoice;
 use Illuminate\Database\Eloquent\Builder;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 
-class ClientInvoiceTableRowComponent extends DataTableComponent
+class InvoiceTableRowComponent extends DataTableComponent
 {
 
-    public Client $client;
-    public array $perPageAccepted = [5, 10, 20];
+    public array $perPageAccepted = [10, 25, 50];
     public bool $perPageAll = true;
-    protected $listeners = ['storeInvoice' => 'query'];
 
     public function columns(): array
     {
@@ -22,6 +20,7 @@ class ClientInvoiceTableRowComponent extends DataTableComponent
                 ->sortable()
                 ->searchable()
                 ->addClass('table_center table_col_width_5'),
+            Column::make('Client'),
             Column::make('First Item'),
             Column::make('Date Sent')
                 ->sortable()
@@ -35,10 +34,8 @@ class ClientInvoiceTableRowComponent extends DataTableComponent
                 ->addClass('table_center table_col_width_10'),
             Column::make('PDF')
                 ->addClass('table_center table_col_width_5'),
-            Column::make('Send')
+            Column::make('Edit')
                 ->addClass('table_center table_col_width_5'),
-            Column::make('Edit'
-            )->addClass('table_center table_col_width_5'),
         ];
     }
 
@@ -46,8 +43,7 @@ class ClientInvoiceTableRowComponent extends DataTableComponent
     {
         return
             Invoice::query()
-                ->where('client_id', $this->client->id)
-                ->with('invoiceStatus', 'invoiceItems');
+                ->with('client', 'invoiceStatus', 'invoiceItems');
     }
 
     public function rowView(): string
