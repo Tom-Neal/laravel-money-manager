@@ -37,6 +37,8 @@ class ClientInvoiceTableRowComponent extends DataTableComponent
                 ->addClass('table_center table_col_width_5'),
             Column::make('Send')
                 ->addClass('table_center table_col_width_5'),
+            Column::make('Copy'
+            )->addClass('table_center table_col_width_5'),
             Column::make('Edit'
             )->addClass('table_center table_col_width_5'),
         ];

@@ -34,7 +34,12 @@ Route::group( ['middleware' => 'auth'], function() {
 
     Route::prefix('invoices')->group(function() {
         Route::get('/',                             [\App\Http\Controllers\InvoiceController::class, 'index']);
-        Route::get('edit/{invoice}',                [\App\Http\Controllers\InvoiceController::class, 'edit']);
+        Route::get('edit/{invoice}',                [\App\Http\Controllers\InvoiceController::class, 'edit'])->name('invoice.edit');
+    });
+
+    Route::prefix('invoices/copy')->group(function() {
+        Route::get('/{invoice}',                    [\App\Http\Controllers\InvoiceCopyController::class, 'create']);
+        Route::post('/{invoice}',                   [\App\Http\Controllers\InvoiceCopyController::class, 'store']);
     });
 
     Route::prefix('invoices/mails')->group(function() {

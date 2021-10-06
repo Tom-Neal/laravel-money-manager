@@ -34,6 +34,8 @@ class InvoiceTableRowComponent extends DataTableComponent
                 ->addClass('table_center table_col_width_10'),
             Column::make('PDF')
                 ->addClass('table_center table_col_width_5'),
+            Column::make('Copy')
+                ->addClass('table_center table_col_width_5'),
             Column::make('Edit')
                 ->addClass('table_center table_col_width_5'),
         ];

@@ -11,12 +11,14 @@ class InvoiceController extends Controller
     public function index()
     {
         $year = DateHelper::getCurrentTaxYear();
-        return view('invoices.index')->with(compact('year'));
+        return view('invoices.index')
+            ->with(compact('year'));
     }
 
     public function edit(Invoice $invoice)
     {
-        return view('invoices.edit')->with(compact('invoice'));
+        return view('invoices.edit')
+            ->with(compact('invoice'));
     }
 
 }

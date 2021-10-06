@@ -34,6 +34,11 @@
     </td>
 @endif
 <td class="table_center">
+    <a class="btn btn-secondary btn-sm" href="{{ url('invoices/copy', $row) }}">
+        <i class="fas fa-copy text-white" aria-hidden="true"></i>
+    </a>
+</td>
+<td class="table_center">
     <a class="btn btn-warning btn-sm" href="{{ url('invoices/edit', $row) }}">
         <i class="fas fa-wrench text-white" aria-hidden="true"></i>
     </a>
