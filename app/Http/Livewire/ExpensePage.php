@@ -29,7 +29,7 @@ class ExpensePage extends Component
 
     public function render()
     {
-        $expenses = Expense::latest('date_incurred')->paginate(20);
+        $expenses = Expense::latest('date_incurred')->get();
         $this->currentTaxYear = $this->getCurrentTaxYear($expenses);
         $this->currentTaxYearTotal = $this->getCurrentTaxYearTotal();
         return view('livewire.expense-page')

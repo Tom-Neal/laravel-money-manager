@@ -44,43 +44,7 @@
     <div class="card card-body">
         <div class="row">
             <div class="col-md-12">
-                <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th class="table_col_width_15">Price</th>
-                                <th class="table_col_width_15">Price (VAT)</th>
-                                <th class="table_col_width_15">Date Incurred</th>
-                                <th class="table_center table_col_width_5">Edit</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($expenses as $expense)
-                                <tr>
-                                    <td>{{ $expense->description }}</td>
-                                    <td>
-                                        {{ $expense->price_formatted }}
-                                    </td>
-                                    <td>
-                                        {{ $expense->price_with_vat_formatted }}
-                                    </td>
-                                    <td>
-                                        {{ date('d/m/Y', strtotime($expense->date_incurred)) }}
-                                    </td>
-                                    <td class="table_center">
-                                        <a class="btn btn-warning btn-sm" href="{{ url('expenses/edit', $expense) }}">
-                                            <i class="fas fa-wrench text-white" aria-hidden="true"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-                <div class="d-flex justify-content-end">
-                    {{ $expenses->links() }}
-                </div>
+                @livewire('expense-table-row-component')
             </div>
         </div>
     </div>

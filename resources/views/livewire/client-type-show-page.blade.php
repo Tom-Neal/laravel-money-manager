@@ -32,9 +32,9 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th>Name</th>
+                            <th class="table_col_width_20">Name</th>
                             <th class="table_col_width_25">Email</th>
-                            <th class="table_col_width_40">Businesses</th>
+                            <th>Businesses</th>
                             <th class="table_center table_col_width_15">Latest Invoice</th>
                             <th class="table_center table_col_width_5">View</th>
                             <th class="table_center table_col_width_5">Edit</th>
