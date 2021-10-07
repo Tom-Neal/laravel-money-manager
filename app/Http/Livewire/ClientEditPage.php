@@ -2,13 +2,15 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Client;
+use App\Models\{Client, Business, Project};
 use Livewire\Component;
 
 class ClientEditPage extends Component
 {
 
     public Client $client;
+    public string $projectName = '';
+    public string $businessName = '';
 
     public function rules(): array
     {
@@ -21,6 +23,8 @@ class ClientEditPage extends Component
             'client.address.address_2'  => 'nullable|string',
             'client.address.address_3'  => 'nullable|string',
             'client.address.postcode'   => 'nullable|string',
+            'client.projects.*.name'    => 'required|string',
+            'client.businesses.*.name'  => 'required|string',
         ];
     }
 
@@ -31,7 +35,7 @@ class ClientEditPage extends Component
 
     public function mount()
     {
-        $this->client->load('address');
+        $this->client->load('address', 'projects', 'businesses');
     }
 
     public function update($propertyName)
@@ -50,6 +54,76 @@ class ClientEditPage extends Component
         $this->dispatchBrowserEvent(
             'notify', ['type' => 'success', 'message' => 'Client address updated']
         );
+    }
+
+    public function storeProject()
+    {
+        $this->client->projects()->create([
+            'name' => $this->projectName
+        ]);
+        $this->client->refresh();
+        $this->projectName = '';
+        $this->dispatchBrowserEvent(
+            'notify', ['type' => 'success', 'message' => 'Project Added']
+        );
+    }
+
+    public function updateProject($propertyName)
+    {
+        $this->validateOnly($propertyName);
+        $this->client->projects->each->save();
+        $this->dispatchBrowserEvent(
+            'notify', ['message' => 'Project Updated']
+        );
+    }
+
+    public function destroyProject(Project $project)
+    {
+        $project->delete();
+        $this->client->refresh();
+        $this->dispatchBrowserEvent(
+            'notify', ['type' => 'danger', 'message' => 'Project Deleted']
+        );
+    }
+
+    public function addProject()
+    {
+        $this->projects[] = [''];
+    }
+
+    public function storeBusiness()
+    {
+        $this->client->businesses()->create([
+            'name' => $this->businessName
+        ]);
+        $this->client->refresh();
+        $this->businessName = '';
+        $this->dispatchBrowserEvent(
+            'notify', ['type' => 'success', 'message' => 'Business Added']
+        );
+    }
+
+    public function updateBusiness($propertyName)
+    {
+        $this->validateOnly($propertyName);
+        $this->client->businesses->each->save();
+        $this->dispatchBrowserEvent(
+            'notify', ['message' => 'Business Updated']
+        );
+    }
+
+    public function destroyBusiness(Business $business)
+    {
+        $business->delete();
+        $this->client->refresh();
+        $this->dispatchBrowserEvent(
+            'notify', ['type' => 'danger', 'message' => 'Business Deleted']
+        );
+    }
+
+    public function addBusiness()
+    {
+        $this->businesses[] = [''];
     }
 
     public function destroy()

@@ -39,7 +39,7 @@ class Client extends Model implements HasMedia
     public function lastInvoice(): HasOne
     {
         return $this->hasOne(Invoice::class)
-            ->latestOfMany()
+            ->latestOfMany('date_sent')
             ->withDefault();
     }
 

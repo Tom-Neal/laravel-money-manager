@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Http\Livewire\ClientShowPage;
+use App\Http\Livewire\{ClientShowPage, ClientEditPage};
 use App\Models\{Client, InvoiceStatus, User};
 use Database\Seeders\{
     ClientTypeTableSeeder,
@@ -34,6 +34,14 @@ class ClientTest extends TestCase
         $response = $this->get('/clients/show/' . $client->id);
         $response->assertOk();
         $response->assertSeeLivewire(ClientShowPage::class);
+    }
+
+    public function test_client_edit_view()
+    {
+        $client = Client::factory()->create();
+        $response = $this->get('/clients/edit/' . $client->id);
+        $response->assertOk();
+        $response->assertSeeLivewire(ClientEditPage::class);
     }
 
     public function test_client_store_invoice()

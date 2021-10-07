@@ -3,6 +3,9 @@
     <div class="row mb-3 align-items-end">
         <div class="col">
             <h1>{{ $client->name }}</h1>
+            <p>
+                Update information for this client.
+            </p>
         </div>
         <div class="col-md-auto d-grid gap-2 d-md-flex justify-content-md-end mt-2">
             <a class="btn btn-primary" href="{{ url('client-types/show', $client->client_type_id) }}">
@@ -35,7 +38,6 @@
             </div>
         </div>
         <div class="row">
-            <x-error></x-error>
             <div class="col-md-12 mb-3">
                 <label for="name">Name</label>
                 <input
@@ -83,10 +85,66 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card card-body mb-3">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3>Projects</h3>
+                        <p>Invoices can be associated with a client project.</p>
+                        <div class="mb-3">
+                            @foreach($client->projects as $key=>$project)
+                                <div class="d-flex mb-2">
+                                    <input
+                                        class="form-control"
+                                        placeholder="Name"
+                                        wire:model="client.projects.{{ $key }}.name"
+                                        wire:change.defer="updateProject('client.projects.{{ $key }}.name')"
+                                    />
+                                    <button class="btn btn-danger btn-sm ms-2" wire:click="destroyProject({{ $project->id }})">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            @endforeach
+                            <input class="form-control" placeholder="Add new project" wire:model="projectName" wire:change="storeProject()" />
+                        </div>
+                        <button class="btn btn-outline-primary" wire:click="addProject()">Add Project</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card card-body mb-3">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3>Businesses</h3>
+                        <p>Invoices can be associated with a client business.</p>
+                        <div class="mb-3">
+                            @foreach($client->businesses as $key=>$business)
+                                <div class="d-flex mb-2">
+                                    <input
+                                        class="form-control"
+                                        placeholder="Name"
+                                        wire:model="client.businesses.{{ $key }}.name"
+                                        wire:change.defer="updateBusiness('client.businesses.{{ $key }}.name')"
+                                    />
+                                    <button class="btn btn-danger btn-sm ms-2" wire:click="destroyBusiness({{ $business->id }})">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            @endforeach
+                            <input class="form-control" placeholder="Add new business" wire:model="businessName" wire:change="storeBusiness()" />
+                        </div>
+                        <button class="btn btn-outline-primary" wire:click="addBusiness()">Add Business</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     @if($client->invoices_count === 0)
         <div class="row">
             <div class="col-md-3">
-                <button class="btn btn-danger w-100" wire:click="destroy()">Delete</button>
+                <button class="btn btn-danger w-100" wire:click="destroy()">Delete Client</button>
             </div>
         </div>
     @endif

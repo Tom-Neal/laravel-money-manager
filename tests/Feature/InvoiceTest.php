@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use App\Http\Livewire\{InvoicePage, InvoiceTableRowComponent};
-use App\Models\{Invoice, User};
+use App\Models\{Business, Invoice, User};
 use Database\Seeders\{
     ClientTypeTableSeeder,
     InvoiceStatusTableSeeder,
@@ -45,10 +45,27 @@ class InvoiceTest extends TestCase
     public function test_update_invoice()
     {
         $invoice = Invoice::factory()->create();
+
+        $number = 1234;
         Livewire::test(InvoicePage::class, [
             'invoice' => $invoice
         ])
+            ->set('invoice.number', $number)
             ->call('update', 'number');
+        $this->assertDatabaseHas('invoices', [
+           'number' => $number
+        ]);
+
+        $business = Business::factory()->create();
+        Livewire::test(InvoicePage::class, [
+            'invoice' => $invoice
+        ])
+            ->set('invoice.business_id', $business->id)
+            ->call('update', 'business_id');
+        $this->assertDatabaseHas('invoices', [
+            'business_id' => $business->id
+        ]);
+
     }
 
     private function seedDatabase()

@@ -44,7 +44,7 @@
                         <h3>Recent Invoices</h3>
                     </div>
                     @foreach($recentInvoices as $recentInvoice)
-                        <div class="col-md-3">
+                        <div class="col-md-3 mb-2">
                             <a class="btn btn-outline-primary w-100" href="{{ url('invoices/edit', $recentInvoice) }}">
                                 {{ $recentInvoice->client->name }}<br />
                                 Total: {{ $recentInvoice->total_formatted }}<br />

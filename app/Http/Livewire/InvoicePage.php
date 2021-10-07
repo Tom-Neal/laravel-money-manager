@@ -19,6 +19,7 @@ class InvoicePage extends Component
             'invoice.date_sent'         => 'nullable|string',
             'invoice.date_paid'         => 'nullable|string',
             'invoice.invoice_status_id' => 'required|integer',
+            'invoice.business_id'       => 'nullable',
         ];
     }
 
@@ -36,6 +37,8 @@ class InvoicePage extends Component
     public function update($propertyName)
     {
         $this->validateOnly($propertyName);
+        // Workaround to address empty string !== NULL
+        $this->invoice->business_id = $this->invoice->business_id ? : NULL;
         $this->invoice->save();
         $this->dispatchBrowserEvent(
             'notify', ['message' => 'Invoice Updated']

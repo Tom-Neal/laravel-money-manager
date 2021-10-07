@@ -25,7 +25,7 @@ class ClientTypeShowPage extends Component
         $clients = $this->clientType
             ->clients()
             ->with('lastInvoice')
-            ->latest()
+            ->orderBy('name')
             ->paginate(20);
         return view('livewire.client-type-show-page')
             ->with(compact('clients'));
