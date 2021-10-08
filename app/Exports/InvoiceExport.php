@@ -26,7 +26,7 @@ class InvoiceExport implements FromCollection, WithMapping, WithHeadings, WithCo
         return
             Invoice::query()
                 ->orderBy('date_sent')
-                ->with('client.clientType', 'invoiceStatus')
+                ->with('client.clientType', 'invoiceStatus', 'items')
                 ->get();
     }
 
@@ -34,11 +34,14 @@ class InvoiceExport implements FromCollection, WithMapping, WithHeadings, WithCo
     {
         return [
             $row->number,
+            $row->total,
             $row->total_formatted,
-            date('d/m/Y', strtotime($row->date_sent)),
+            $row->date_sent ? date('d/m/Y', strtotime($row->date_sent)) : NULL,
+            $row->date_paid ? date('d/m/Y', strtotime($row->date_paid)) : NULL,
             $row->client->clientType->name,
             $row->client->name,
             $row->invoiceStatus->name,
+            $row->items->count(),
         ];
     }
 
@@ -47,10 +50,13 @@ class InvoiceExport implements FromCollection, WithMapping, WithHeadings, WithCo
         return [
             'Number',
             'Total',
+            'Total Formatted',
             'Date Sent',
+            'Date Paid',
             'Type',
             'Client',
             'Status',
+            'Item #',
         ];
     }
 

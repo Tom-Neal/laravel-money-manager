@@ -45,7 +45,8 @@ class InvoiceTableRowComponent extends DataTableComponent
     {
         return
             Invoice::query()
-                ->with('client', 'invoiceStatus', 'invoiceItems');
+                ->orderBy('date_sent', 'desc')
+                ->with('client', 'invoiceStatus', 'items');
     }
 
     public function rowView(): string

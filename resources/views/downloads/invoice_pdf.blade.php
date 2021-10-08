@@ -181,10 +181,10 @@
                     <div class="bold green">DESCRIPTION</div>
                     <div class="bold right margin-correct green">AMOUNT</div>
                 </div>
-                @foreach($invoice->invoiceItems as $invoiceItem)
+                @foreach($invoice->items as $item)
                     <div class="border-bottom-light padding-10 font-small">
-                        <div>{{ $invoiceItem->description }}</div>
-                        <div class="right margin-correct">{{ $invoiceItem->price_formatted }}</div>
+                        <div>{{ $item->description }}</div>
+                        <div class="right margin-correct">{{ $item->price_formatted }}</div>
                     </div>
                 @endforeach
                 <div id="total" class="padding-10 bold border-bottom-light">
@@ -196,10 +196,10 @@
         @if($withPayments)
             <div id="payments">
                 <h2>PAID</h2>
-                @foreach($invoice->invoicePayments as $invoicePayment)
+                @foreach($invoice->payments as $payment)
                     <div class="font-small">
-                        <div>{{ date('d/m/Y', strtotime( $invoicePayment->date_paid)) }}</div>
-                        <div class="right margin-correct">{{ $invoicePayment->total_formatted }}</div>
+                        <div>{{ date('d/m/Y', strtotime( $payment->date_paid)) }}</div>
+                        <div class="right margin-correct">{{ $payment->total_formatted }}</div>
                     </div>
                 @endforeach
             </div>

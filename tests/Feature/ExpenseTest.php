@@ -2,8 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Http\Livewire\ExpensePage;
-use App\Models\Expense;
+use App\Http\Livewire\{ExpensePage, ExpenseTableRowComponent};
 use App\Models\User;
 use Database\Seeders\{
     ClientTypeTableSeeder,
@@ -32,12 +31,23 @@ class ExpenseTest extends TestCase
     {
         $response = $this->get('/expenses');
         $response->assertSeeLivewire(ExpensePage::class);
+        $response->assertSeeLivewire(ExpenseTableRowComponent::class);
     }
 
-//    public function test_delete_expense() {
-//        $expense = Expense::factory()->create();
-//
-//    }
+    public function test_store_expense()
+    {
+        $description = $this->faker->text;
+        Livewire::test(ExpensePage::class,)
+            ->set('description', $description)
+            ->set('price', 100)
+            ->set('date_incurred', '2021-10-08')
+            ->set('vat_included', rand(0, 1))
+            ->call('store');
+        $this->assertDatabaseCount('expenses', 1);
+        $this->assertDatabaseHas('expenses', [
+            'description' => $description
+        ]);
+    }
 
     private function seedDatabase()
     {

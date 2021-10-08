@@ -13,7 +13,7 @@ class Invoice extends Model
     use HasFactory;
 
     protected $table = 'invoices';
-    protected $with = ['firstInvoiceItem', 'lastPayment'];
+    protected $with = ['firstItem', 'lastPayment'];
     protected $appends = ['total_formatted', 'number_formatted'];
 
     public function client(): BelongsTo
@@ -26,18 +26,18 @@ class Invoice extends Model
         return $this->belongsTo(InvoiceStatus::class);
     }
 
-    public function invoiceItems(): HasMany
+    public function items(): HasMany
     {
         return $this->hasMany(InvoiceItem::class);
     }
 
-    public function firstInvoiceItem(): HasOne
+    public function firstItem(): HasOne
     {
         return $this->hasOne(InvoiceItem::class)
             ->oldestOfMany();
     }
 
-    public function invoicePayments(): HasMany
+    public function payments(): HasMany
     {
         return $this->hasMany(InvoicePayment::class);
     }
@@ -102,8 +102,8 @@ class Invoice extends Model
     {
         // Ensure the total equates to sum of all invoice payments
         if (
-            $this->total > $this->invoicePayments->sum('total') &&
-            $this->invoicePayments->isNotEmpty()
+            $this->total > $this->payments->sum('total') &&
+            $this->payments->isNotEmpty()
         ) {
             return false;
         }
@@ -113,7 +113,7 @@ class Invoice extends Model
     public function downloadCheck(): bool
     {
         // Only permit invoice download/export if these conditions are met
-        if (!$this->date_sent || !$this->total || $this->invoiceItems->isEmpty()) {
+        if (!$this->date_sent || !$this->total || $this->items->isEmpty()) {
             return false;
         }
         return true;

@@ -33,7 +33,7 @@
             </div>
             <div class="mb-3 col-md-4">
                 <label class="control-label" for="vat_included">VAT included?</label>
-                <input class="form-check" name="vat_included" type="checkbox" @if($expense->vat_included) checked @endif />
+                <input class="form-check" name="vat_included" type="checkbox" value="1" @if($expense->vat_included) checked @endif />
             </div>
             <div class="mb-3 col-md-4">
                 <label class="control-label" for="date_incurred">Date Incurred</label>

@@ -5,7 +5,7 @@
         @if($clientTypes->isNotEmpty())
             <div class="row mb-3">
                 @foreach($clientTypes as $clientType)
-                    <div class="col-md-6">
+                    <div class="col-lg-6">
                         <a class="btn btn-primary w-100 py-3 mb-3" href="{{ url('client-types/show', $clientType) }}">
                             {{ $clientType->name }} Clients
                             <i class="fas {{ $clientType->icon }} ms-1"></i>
@@ -17,10 +17,10 @@
         @if($invoiceItemsRenewalRequired->isNotEmpty())
             <div class="card card-body mb-3">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-lg-12">
                         <h3>Upcoming Renewals</h3>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-lg-12">
                         @foreach($invoiceItemsRenewalRequired as $invoiceItem)
                             <div class="d-flex justify-content-between border-top py-2">
                                 <div>{{ $invoiceItem->description }}</div>
@@ -40,11 +40,11 @@
         @if($recentInvoices->isNotEmpty())
             <div class="card card-body mb-3">
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-lg-12">
                         <h3>Recent Invoices</h3>
                     </div>
                     @foreach($recentInvoices as $recentInvoice)
-                        <div class="col-md-3 mb-2">
+                        <div class="col-lg-3 mb-2">
                             <a class="btn btn-outline-primary w-100" href="{{ url('invoices/edit', $recentInvoice) }}">
                                 {{ $recentInvoice->client->name }}<br />
                                 Total: {{ $recentInvoice->total_formatted }}<br />
@@ -57,10 +57,10 @@
         @endif
         <div class="card card-body mb-3">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-lg-12">
                     <h3>Income</h3>
                 </div>
-                <div class="col-md-12">
+                <div class="col-lg-12">
                     @foreach($invoiceYears as $key=>$invoices)
                         <div class="d-flex justify-content-between border-top py-2">
                             <div>{{ $key }}</div>
@@ -74,10 +74,10 @@
         </div>
         <div class="card card-body">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-lg-12">
                     <h3>Expenses</h3>
                 </div>
-                <div class="col-md-12">
+                <div class="col-lg-12">
                     @foreach($expenseYears as $key=>$expenses)
                         <div class="d-flex justify-content-between border-top py-2">
                             <div>{{ $key }}</div>

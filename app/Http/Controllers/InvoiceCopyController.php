@@ -19,12 +19,12 @@ class InvoiceCopyController extends Controller
         $newInvoice = $invoice->replicate();
         $newInvoice->save();
 
-        $newInvoice->invoiceItems()->createMany(
-            $invoice->invoiceItems()
+        $newInvoice->items()->createMany(
+            $invoice->items()
                 ->select('description', 'price', 'hours', 'renewal_required')->get()->toArray()
         );
-        $newInvoice->invoicePayments()->createMany(
-            $invoice->invoicePayments()
+        $newInvoice->payments()->createMany(
+            $invoice->payments()
                 ->select('total', 'date_paid')->get()->toArray()
         );
 

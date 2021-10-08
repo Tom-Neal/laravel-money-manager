@@ -33,7 +33,7 @@ class ClientShowPage extends Component
 
     public function render()
     {
-        $this->client->load('invoices.invoiceStatus', 'invoices.invoiceItems', 'comments');
+        $this->client->load('invoices.invoiceStatus', 'invoices.items', 'comments');
         return view('livewire.client-show-page');
     }
 

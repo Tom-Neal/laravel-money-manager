@@ -4,7 +4,7 @@
         {{ $row->client->name ?? $row->business->name ?? '' }}
     </td>
 @endif
-<td>{{ $row->firstInvoiceItem->description ?? '' }}</td>
+<td>{{ $row->firstItem->description ?? '' }}</td>
 <td class="table_center">{{ $row->date_sent }}</td>
 <td class="table_center">{{ $row->lastPayment->date_paid ?? '' }}</td>
 <td class="table_center">{{ $row->total_formatted }}</td>

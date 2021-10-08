@@ -35,8 +35,8 @@
             </div>
             <div class="col-md-6">
                 <div class="card card-body">
-                    <h5>Number of Items: {{ $invoice->invoiceItems->count() }}</h5>
-                    <h5>Number of Payments: {{ $invoice->invoicePayments->count() }}</h5>
+                    <h5>Number of Items: {{ $invoice->items->count() }}</h5>
+                    <h5>Number of Payments: {{ $invoice->payments->count() }}</h5>
                 </div>
             </div>
             <div class="col-md-12 d-grid gap-2 d-md-block text-end">
