@@ -85,6 +85,7 @@ class ClientShowPage extends Component
     public function destroyMedia(Media $media)
     {
         $media->delete();
+        $this->client->refresh();
         $this->dispatchBrowserEvent(
             'notify', ['type' => 'danger', 'message' => 'File Deleted']
         );

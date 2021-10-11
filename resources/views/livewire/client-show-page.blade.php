@@ -90,7 +90,7 @@
                                     </a>
                                 </td>
                                 <td class="table_center table_col_width_5">
-                                    <button class="btn btn-danger btn-sm border border-danger border-2" wire:click="deleteConfirm({{ $file->id }})">
+                                    <button class="btn btn-danger btn-sm border border-danger border-2" wire:click="destroyMedia({{ $file->id }})">
                                         <i class="fas fa-times"></i>
                                     </button>
                                 </td>
