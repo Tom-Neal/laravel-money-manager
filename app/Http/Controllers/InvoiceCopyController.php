@@ -16,7 +16,9 @@ class InvoiceCopyController extends Controller
     public function store(Invoice $invoice)
     {
 
-        $newInvoice = $invoice->replicate();
+        $newInvoice = $invoice->replicate()->fill([
+            'number' => $invoice->client->newInvoiceNumber()
+        ]);
         $newInvoice->save();
 
         $newInvoice->items()->createMany(

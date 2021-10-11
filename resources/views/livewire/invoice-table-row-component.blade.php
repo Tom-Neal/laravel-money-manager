@@ -15,6 +15,15 @@
 </td>
 <td class="table_center">
     @if($row->downloadCheck())
+        <a class="btn btn-primary btn-sm" href="{{ url('invoices/download/preview', $row) }}" target="_blank">
+            <i class="fas fa-eye text-white" aria-hidden="true"></i>
+        </a>
+    @else
+        <span>-</span>
+    @endif
+</td>
+<td class="table_center">
+    @if($row->downloadCheck())
         <a class="btn btn-primary btn-sm" href="{{ url('invoices/download', $row) }}">
             <i class="fas fa-download text-white" aria-hidden="true"></i>
         </a>

@@ -18,6 +18,13 @@ class SettingController extends Controller
         $settings->update(request([
             'name', 'email', 'phone', 'google_map_api_key'
         ]));
+        $settings->address()->update([
+            'name'      => request()['address_name'],
+            'address_1' => request()['address_1'],
+            'address_2' => request()['address_2'],
+            'address_3' => request()['address_3'],
+            'postcode'  => request()['postcode'],
+        ]);
         return back()->with('message', 'Settings Updated');
     }
 

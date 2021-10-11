@@ -11,11 +11,17 @@ class SettingTableSeeder extends Seeder
     public function run()
     {
 
-        Setting::create([
+        $settings = Setting::create([
             'name'               => '',
             'email'              => '',
             'phone'              => '',
             'google_map_api_key' => ''
+        ]);
+        $settings->address()->create([
+            'name'      => 'Address name',
+            'address_1' => 'Address 1',
+            'address_2' => 'Address 2',
+            'postcode'  => 'Postcode',
         ]);
 
     }

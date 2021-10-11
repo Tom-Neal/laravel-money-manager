@@ -45,10 +45,13 @@
                     </div>
                     @foreach($recentInvoices as $recentInvoice)
                         <div class="col-lg-3 mb-2">
-                            <a class="btn btn-outline-primary w-100" href="{{ url('invoices/edit', $recentInvoice) }}">
-                                {{ $recentInvoice->client->name }}<br />
-                                Total: {{ $recentInvoice->total_formatted }}<br />
-                                Status: {{ $recentInvoice->invoiceStatus->name }}
+                            <a class="btn btn-outline-primary w-100 d-flex justify-content-between align-items-center home-invoice-button" href="{{ url('invoices/edit', $recentInvoice) }}">
+                                <div class="text-start">
+                                    {{ $recentInvoice->client->name }}<br />
+                                    {{ $recentInvoice->total_formatted }}<br />
+                                    {{ $recentInvoice->invoiceStatus->name }}
+                                </div>
+                                <i class="fas fa-file-pdf"></i>
                             </a>
                         </div>
                     @endforeach

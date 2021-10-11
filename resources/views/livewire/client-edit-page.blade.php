@@ -9,8 +9,12 @@
         </div>
         <div class="col-md-auto d-grid gap-2 d-md-flex justify-content-md-end mt-2">
             <a class="btn btn-primary" href="{{ url('client-types/show', $client->client_type_id) }}">
-                <i class="fas fa-arrow-left me-1"></i>
-                Back to {{ $client->clientType->name }} Clients
+                <i class="fas {{ $client->clientType->icon }} me-1"></i>
+                {{ $client->clientType->name }} Clients
+            </a>
+            <a class="btn btn-primary" href="{{ url('clients/show', $client) }}">
+                <i class="fas fa-eye me-1"></i>
+                View Client
             </a>
         </div>
     </div>

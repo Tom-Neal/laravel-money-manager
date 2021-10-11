@@ -80,6 +80,10 @@
                 border-bottom: 1px solid #18222b;
             }
 
+            .item-text {
+                max-width: 600px;
+            }
+
             #invoice {
                 width: 710px;
             }
@@ -156,6 +160,8 @@
                         @if($settings->address)
                             <div class="padding-3 font-small">{{ $settings->address->name }}</div>
                             <div class="padding-3 font-small">{{ $settings->address->address_1 }}</div>
+                            <div class="padding-3 font-small">{{ $settings->address->address_2 }}</div>
+                            <div class="padding-3 font-small">{{ $settings->address->address_3 }}</div>
                             <div class="padding-3 font-small">{{ $settings->address->postcode }}</div>
                         @endif
                         <div>{{ $settings->phone }}</div>
@@ -183,7 +189,7 @@
                 </div>
                 @foreach($invoice->items as $item)
                     <div class="border-bottom-light padding-10 font-small">
-                        <div>{{ $item->description }}</div>
+                        <div class="item-text">{{ $item->description }}</div>
                         <div class="right margin-correct">{{ $item->price_formatted }}</div>
                     </div>
                 @endforeach
