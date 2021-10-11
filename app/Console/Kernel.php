@@ -23,6 +23,10 @@ class Kernel extends ConsoleKernel
             ->daily()
             ->at('09:00');
 
+        // Run DB backup from package - dumps .sql file once per day
+        $schedule->command('backup:clean')->daily()->at('01:00');
+        $schedule->command('backup:run')->daily()->at('02:00');
+
     }
 
     protected function commands()
