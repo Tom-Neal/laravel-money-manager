@@ -32,12 +32,16 @@ class SettingTest extends TestCase
             'name'              => $this->faker->name(),
             'email'             => $this->faker->unique()->safeEmail,
             'phone'             => $this->faker->phoneNumber(),
+            'bank_name'         => 'Monzo',
             'address_name'      => $this->faker->streetName,
             'postcode'          => $this->faker->postcode,
         ];
         $response = $this->patch('/settings/1', $attributes);
         $response->assertStatus(302);
-        $this->assertDatabaseHas('settings', ['email' => $attributes['email']]);
+        $this->assertDatabaseHas('settings', [
+            'email'     => $attributes['email'],
+            'bank_name' => $attributes['bank_name'],
+        ]);
         $this->assertDatabaseHas('addresses', [
             'name'          => $attributes['address_name'],
             'postcode'      => $attributes['postcode'],

@@ -166,20 +166,22 @@
                         @endif
                         <div>{{ $settings->phone }}</div>
                     </div>
-                    <div id="bank" class="right padding-10 font-small">
-                        <div class="padding-3">
-                            <span>Bank information:</span>
-                            <span></span>
+                    @if($settings->bank_name && $settings->bank_account_number && $settings->bank_sort_code)
+                        <div id="bank" class="right padding-10 font-small">
+                            <div class="padding-3">
+                                <span>Bank information:</span>
+                                <span>{{ $settings->bank_name }}</span>
+                            </div>
+                            <div class="padding-3">
+                                <span>Account number:</span>
+                                <span>{{ $settings->bank_account_number }}</span>
+                            </div>
+                            <div class="padding-3">
+                                <span>Sort code:</span>
+                                <span>{{ $settings->bank_sort_code }}</span>
+                            </div>
                         </div>
-                        <div class="padding-3">
-                            <span>Account number:</span>
-                            <span></span>
-                        </div>
-                        <div class="padding-3">
-                            <span>Sort code:</span>
-                            <span></span>
-                        </div>
-                    </div>
+                    @endif
                 </div>
             </div>
             <div id="items">

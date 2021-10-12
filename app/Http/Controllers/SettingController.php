@@ -16,7 +16,7 @@ class SettingController extends Controller
     public function update(Setting $settings)
     {
         $settings->update(request([
-            'name', 'email', 'phone', 'google_map_api_key'
+            'name', 'email', 'phone', 'bank_name', 'bank_account_number', 'bank_sort_code', 'google_map_api_key'
         ]));
         $settings->address()->update([
             'name'      => request()['address_name'],

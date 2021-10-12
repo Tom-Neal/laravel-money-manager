@@ -56,6 +56,36 @@
                     type="text"
                 />
             </div>
+            <div class="mb-3 col-md-6">
+                <label for="bank_name">Bank Name</label>
+                <input
+                        id="bank_name"
+                        class="form-control"
+                        name="bank_name"
+                        value="{{ old('bank_name', $settings->bank_name) }}"
+                        type="text"
+                />
+            </div>
+            <div class="mb-3 col-md-6">
+                <label for="bank_account_number">Bank Account Number</label>
+                <input
+                    id="bank_account_number"
+                    class="form-control"
+                    name="bank_account_number"
+                    value="{{ old('bank_account_number', $settings->bank_account_number) }}"
+                    type="text"
+                />
+            </div>
+            <div class="mb-3 col-md-6">
+                <label for="bank_sort_code">Bank Sort Code</label>
+                <input
+                    id="bank_sort_code"
+                    class="form-control"
+                    name="bank_sort_code"
+                    value="{{ old('bank_sort_code', $settings->bank_sort_code) }}"
+                    type="text"
+                />
+            </div>
             <div class="col-md-12 mb-3">
                 <label for="name">Address Name</label>
                 <input
