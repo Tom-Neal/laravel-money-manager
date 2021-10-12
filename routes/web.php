@@ -63,6 +63,8 @@ Route::group( ['middleware' => 'auth'], function() {
         Route::delete('/{expense}',                 [\App\Http\Controllers\ExpenseController::class, 'destroy']);
     });
 
+    Route::get('statements',                        \App\Http\Controllers\StatementController::class);
+
     Route::prefix('exports')->group(function() {
         Route::get('invoices',                      [\App\Http\Controllers\ExportController::class, 'invoice']);
         Route::get('expenses',                      [\App\Http\Controllers\ExportController::class, 'expense']);
