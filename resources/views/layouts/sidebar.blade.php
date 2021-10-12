@@ -7,16 +7,16 @@
             <i class="fas fa-home me-1"></i>
             Home
         </a>
-        <a href="{{ url('users/profile') }}" class="list-group-item pt-3 pb-3">
-            <i class="fas fa-wrench me-1"></i>
-            Update Profile
-        </a>
         @foreach($clientTypes as $clientType)
             <a href="{{ url('client-types/show', $clientType) }}" class="list-group-item pt-3 pb-3">
                 <i class="fas {{ $clientType->icon }} me-1"></i>
                 {{ $clientType->name }} Clients
             </a>
         @endforeach
+        <a href="{{ url('client-types') }}" class="list-group-item pt-3 pb-3">
+            <i class="fas fa-users me-1"></i>
+            Client Types
+        </a>
         <a href="{{ url('invoices') }}" class="list-group-item pt-3 pb-3">
             <i class="fas fa-money-check me-1"></i>
             Invoices
@@ -29,10 +29,6 @@
             <i class="fas fa-cash-register me-1"></i>
             Statements
         </a>
-        <a href="{{ url('client-types') }}" class="list-group-item pt-3 pb-3">
-            <i class="fas fa-users me-1"></i>
-            Client Types
-        </a>
         <a href="{{ url('media') }}" class="list-group-item pt-3 pb-3">
             <i class="fas fa-file-download me-1"></i>
             File Storage
@@ -40,6 +36,10 @@
         <a href="{{ url('settings/edit', App\Models\Setting::PREFERENCES) }}" class="list-group-item pt-3 pb-3">
             <i class="fas fa-cogs me-1"></i>
             Settings
+        </a>
+        <a href="{{ url('users/profile') }}" class="list-group-item pt-3 pb-3">
+            <i class="fas fa-wrench me-1"></i>
+            Update Profile
         </a>
         <form class="list-group-item p-0" method="POST" action="{{ url('logout') }}">
             @csrf

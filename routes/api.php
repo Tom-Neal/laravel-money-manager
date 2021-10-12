@@ -17,3 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::prefix('media')->group(function() {
+    Route::get('/',         [\App\Http\Controllers\API\MediaController::class, 'index']);
+    Route::get('/{media}',  [\App\Http\Controllers\API\MediaController::class, 'show']);
+});

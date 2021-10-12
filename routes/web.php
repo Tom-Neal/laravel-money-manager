@@ -70,11 +70,7 @@ Route::group( ['middleware' => 'auth'], function() {
         Route::get('expenses',                      [\App\Http\Controllers\ExportController::class, 'expense']);
     });
 
-    Route::prefix('media')->group(function() {
-        Route::get('/',                             [\App\Http\Controllers\MediaController::class, 'index']);
-        Route::get('/{media}',                      [\App\Http\Controllers\MediaController::class, 'show']);
-    });
-
+    Route::get('media',                             \App\Http\Controllers\MediaController::class);
 
     Route::prefix('users/profile')->group(function() {
         Route::get('/',                             [\App\Http\Controllers\UserProfileController::class, 'show']);
