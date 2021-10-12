@@ -5,7 +5,7 @@ namespace App\Helpers;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\MediaLibrary\Support\PathGenerator\DefaultPathGenerator;
 
-class EnvironmentPathGenerator extends DefaultPathGenerator
+class EnvironmentPathGeneratorHelper extends DefaultPathGenerator
 {
 
     /*

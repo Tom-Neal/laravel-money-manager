@@ -69,39 +69,10 @@
             <div class="col-md-12">
                 <h3>Files</h3>
             </div>
-        </div>
-        @if($client->media->isNotEmpty())
-            <div class="table-responsive">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th>Filename</th>
-                            <th class="table_center table_col_width_5">Download</th>
-                            <th class="table_center table_col_width_5">Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($client->media as $file)
-                            <tr>
-                                <td>{{ $file->name }}</td>
-                                <td class="table_center">
-                                    <a class="btn btn-primary btn-sm border border-primary border-2" href="{{ url('media', $file) }}" download>
-                                        <i class="fas fa-download"></i>
-                                    </a>
-                                </td>
-                                <td class="table_center table_col_width_5">
-                                    <button class="btn btn-danger btn-sm border border-danger border-2" wire:click="destroyMedia({{ $file->id }})">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+            <div class="col-md-12">
+                @livewire('client-media-table-row-component', ['client' => $client])
             </div>
-        @else
-            <span class="fst-italic">There are no files for this client yet.</span>
-        @endif
+        </div>
     </div>
     <x-filepond :files="$files"></x-filepond>
     <div class="card card-body mb-3">

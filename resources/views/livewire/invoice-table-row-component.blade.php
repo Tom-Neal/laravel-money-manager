@@ -9,7 +9,7 @@
 <td class="table_center">{{ $row->lastPayment->date_paid ?? '' }}</td>
 <td class="table_center">{{ $row->total_formatted }}</td>
 <td class="table_center">
-    <span class="fw-bold w-50 py-2 badge bg-{{ $row->invoiceStatus->colour }}">
+    <span class="fw-bold w-75 py-2 badge bg-{{ $row->invoiceStatus->colour }}">
         {{ $row->invoiceStatus->name }}
     </span>
 </td>

@@ -233,6 +233,7 @@ return [
 
         'CurrencyHelper' => App\Helpers\CurrencyHelper::class,
         'DateHelper' => App\Helpers\DateHelper::class,
+        'FileSizeHelper' => App\Helpers\FileSizeHelper::class,
 
     ],
 

@@ -29,6 +29,10 @@
             <i class="fas fa-users me-1"></i>
             Client Types
         </a>
+        <a href="{{ url('media') }}" class="list-group-item pt-3 pb-3">
+            <i class="fas fa-file-download me-1"></i>
+            File Storage
+        </a>
         <a href="{{ url('settings/edit', App\Models\Setting::PREFERENCES) }}" class="list-group-item pt-3 pb-3">
             <i class="fas fa-cogs me-1"></i>
             Settings

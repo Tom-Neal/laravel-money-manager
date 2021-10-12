@@ -88,7 +88,7 @@ return [
     /*
      * The class that contains the strategy for determining a media file's path.
      */
-    'path_generator' => App\Helpers\EnvironmentPathGenerator::class,
+    'path_generator' => App\Helpers\EnvironmentPathGeneratorHelper::class,
 
     /*
      * When urls to files get generated, this class will be called. Use the default

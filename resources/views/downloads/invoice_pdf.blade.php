@@ -169,15 +169,15 @@
                     <div id="bank" class="right padding-10 font-small">
                         <div class="padding-3">
                             <span>Bank information:</span>
-                            <span>Nationwide</span>
+                            <span></span>
                         </div>
                         <div class="padding-3">
                             <span>Account number:</span>
-                            <span>46215981</span>
+                            <span></span>
                         </div>
                         <div class="padding-3">
                             <span>Sort code:</span>
-                            <span>07-04-36</span>
+                            <span></span>
                         </div>
                     </div>
                 </div>

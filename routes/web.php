@@ -68,7 +68,11 @@ Route::group( ['middleware' => 'auth'], function() {
         Route::get('expenses',                      [\App\Http\Controllers\ExportController::class, 'expense']);
     });
 
-    Route::get('media/{media}',                     [\App\Http\Controllers\MediaController::class, 'show']);
+    Route::prefix('media')->group(function() {
+        Route::get('/',                             [\App\Http\Controllers\MediaController::class, 'index']);
+        Route::get('/{media}',                      [\App\Http\Controllers\MediaController::class, 'show']);
+    });
+
 
     Route::prefix('users/profile')->group(function() {
         Route::get('/',                             [\App\Http\Controllers\UserProfileController::class, 'show']);

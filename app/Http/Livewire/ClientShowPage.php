@@ -80,6 +80,7 @@ class ClientShowPage extends Component
         }
         $this->files = [];
         $this->client->refresh();
+        $this->emit('storeMedia');
     }
 
     public function destroyMedia(Media $media)
