@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Helpers\DateHelper;
 use App\Models\{ClientType, Invoice, Expense};
 use Livewire\Component;
 
@@ -9,8 +10,8 @@ class StatementPage extends Component
 {
 
     public bool $showData = false;
-    public string $dateStart = '2020-04-06';
-    public string $dateEnd = '2021-04-05';
+    public string $dateStart;
+    public string $dateEnd;
     public array $clientTypeInvoices;
     public int $expenseTotal;
 
@@ -19,9 +20,18 @@ class StatementPage extends Component
         return view('livewire.statement-page');
     }
 
+    public function mount()
+    {
+        // Load previous tax year by default
+        $year = DateHelper::getCurrentTaxYear();
+        $this->dateStart = ($year - 1) . "-04-06";
+        $this->dateEnd = "$year-04-05";
+    }
+
     public function getData()
     {
         // TODO - Refactor to service class
+
         $clientTypes = ClientType::all();
         foreach($clientTypes as $clientType) {
             $invoiceTotal = Invoice::query()->whereBetween('date_paid', [$this->dateStart, $this->dateEnd])
@@ -30,8 +40,15 @@ class StatementPage extends Component
                 })->sum('total');
             $this->clientTypeInvoices["$clientType->name"] = $invoiceTotal;
         }
+
         $this->expenseTotal = Expense::query()->whereBetween('date_incurred', [$this->dateStart, $this->dateEnd])->sum('price');
-        $this->showData     = true;
+
+        $this->expenseTotalWithVat = Expense::query()->whereBetween('date_incurred', [$this->dateStart, $this->dateEnd])->sum('price_with_vat');
+
+        $this->showData = true;
+        $this->dispatchBrowserEvent(
+            'notify', ['type' => 'success', 'message' => 'Data Retrieved']
+        );
     }
 
 }

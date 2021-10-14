@@ -9,8 +9,8 @@
             <p>Update settings used throughout the application.</p>
         </div>
     </div>
-    <div class="card card-body p-4">
-        <form class="row" method="POST" action="{{ url('settings', $settings) }}">
+    <form class="card card-body p-4" method="POST" action="{{ url('settings', $settings) }}">
+        <div class="row mb-4">
             @method('PATCH')
             @csrf
             <x-error></x-error>
@@ -56,6 +56,8 @@
                     type="text"
                 />
             </div>
+        </div>
+        <div class="row mb-4">
             <div class="mb-3 col-md-6">
                 <label for="bank_name">Bank Name</label>
                 <input
@@ -86,7 +88,9 @@
                     type="text"
                 />
             </div>
-            <div class="col-md-12 mb-3">
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
                 <label for="name">Address Name</label>
                 <input
                     class="form-control"
@@ -142,7 +146,7 @@
                     <i class="fas fa-wrench ms-1" aria-hidden="true"></i>
                 </button>
             </div>
-        </form>
-    </div>
+        </div>
+    </form>
 </div>
 @endsection

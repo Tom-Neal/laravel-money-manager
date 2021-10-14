@@ -12,7 +12,6 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/fortify": "^1.7",
         "laravel/framework": "^8.40",
-        "laravel/passport": "^10.1",
         "laravel/slack-notification-channel": "^2.0",
         "laravel/tinker": "^2.5",
         "league/flysystem-aws-s3-v3": "^1.0",

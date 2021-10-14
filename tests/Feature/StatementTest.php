@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Http\Livewire\StatementPage;
 use App\Models\User;
 use Database\Seeders\{
     ClientTypeTableSeeder,
@@ -9,10 +10,11 @@ use Database\Seeders\{
     SettingTableSeeder,
     UserTableSeeder
 };
+use Livewire\Livewire;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\{RefreshDatabase, WithFaker};
 
-class InvoiceDownloadTest extends TestCase
+class StatementTest extends TestCase
 {
     use WithFaker, RefreshDatabase;
 
@@ -25,13 +27,20 @@ class InvoiceDownloadTest extends TestCase
         $this->actingAsAdmin();
     }
 
-//    public function test_invoice_download_pdf() {
-//
-//    }
-//
-//    public function test_invoice_download_tax_year_pdfs() {
-//
-//    }
+    public function test_get_statement_view()
+    {
+        $response = $this->get('/statements');
+        $response->assertOk();
+        $response->assertSeeLivewire(StatementPage::class);
+    }
+
+    public function test_get_statement_data()
+    {
+        Livewire::test(StatementPage::class)
+            ->call('getData')
+            ->assertSet('showData', true)
+            ->assertDispatchedBrowserEvent('notify');
+    }
 
     private function seedDatabase()
     {

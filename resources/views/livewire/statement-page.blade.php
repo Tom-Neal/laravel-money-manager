@@ -43,16 +43,32 @@
                         </div>
                     @endforeach
                 </div>
+                <div class="col-md-12 pt-2 pb-2">
+                    <div class="d-flex justify-content-between pb-2">
+                        <span>Total Income</span>
+                        <span>{{ CurrencyHelper::getFormattedValue(array_sum($clientTypeInvoices)) }}</span>
+                    </div>
+                </div>
                 <div class="col-md-12 pt-2 pb-2 border-bottom">
-                    <div class="d-flex justify-content-between">
-                        <h4>Expenses</h4>
+                    <h4>Expenses</h4>
+                    <div class="d-flex justify-content-between pb-2">
+                        <span>Without VAT</span>
                         <span>{{ CurrencyHelper::getFormattedValue($expenseTotal) }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between pb-2 text-secondary">
+                        <span>With VAT</span>
+                        <span>{{ CurrencyHelper::getFormattedValue($expenseTotalWithVat) }}</span>
                     </div>
                 </div>
                 <div class="col-md-12 pt-2 pb-2">
-                    <div class="d-flex justify-content-between fw-bold">
-                        <h4>Net Profit</h4>
+                    <h4>Net Profit</h4>
+                    <div class="d-flex justify-content-between pb-2 fw-bold">
+                        <span>Without Expense VAT</span>
                         <span>{{ CurrencyHelper::getFormattedValue(array_sum($clientTypeInvoices) - $expenseTotal) }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between fw-bold text-secondary">
+                        <span>With Expense VAT</span>
+                        <span>{{ CurrencyHelper::getFormattedValue(array_sum($clientTypeInvoices) - $expenseTotalWithVat) }}</span>
                     </div>
                 </div>
             </div>

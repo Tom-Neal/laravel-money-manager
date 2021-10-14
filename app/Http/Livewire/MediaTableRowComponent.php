@@ -2,7 +2,6 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Invoice;
 use Illuminate\Database\Eloquent\Builder;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
@@ -18,13 +17,15 @@ class MediaTableRowComponent extends DataTableComponent
     public function columns(): array
     {
         return [
-            Column::make('FileName')
+            Column::make('Name')
                 ->sortable()
                 ->searchable(),
             Column::make('Size')
-                ->addClass('table_center table_col_width_10'),
-            Column::make('Uploaded')
-                ->addClass('table_center table_col_width_15'),
+                ->sortable()
+                ->addClass('table_col_width_10'),
+            Column::make('Uploaded', 'created_at')
+                ->sortable()
+                ->addClass('table_col_width_15'),
             Column::make('Download')
                 ->addClass('table_center table_col_width_5'),
             Column::make('Delete')
@@ -37,8 +38,7 @@ class MediaTableRowComponent extends DataTableComponent
         return
             Media::query()
                 ->where('model_type', 'App\Models\User')
-                ->where('model_id', auth()->user()->id)
-                ->latest();
+                ->where('model_id', auth()->user()->id);
     }
 
     public function rowView(): string

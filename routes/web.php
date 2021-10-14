@@ -72,6 +72,11 @@ Route::group( ['middleware' => 'auth'], function() {
 
     Route::get('media',                             \App\Http\Controllers\MediaController::class);
 
+    Route::prefix('media/download')->group(function() {
+        Route::get('/',                             [\App\Http\Controllers\MediaDownloadController::class, 'index']);
+        Route::get('/{media}',                      [\App\Http\Controllers\MediaDownloadController::class, 'show']);
+    });
+
     Route::prefix('users/profile')->group(function() {
         Route::get('/',                             [\App\Http\Controllers\UserProfileController::class, 'show']);
         Route::patch('/',                           [\App\Http\Controllers\UserProfileController::class, 'update']);

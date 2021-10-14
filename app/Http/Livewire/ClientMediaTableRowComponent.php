@@ -19,13 +19,15 @@ class ClientMediaTableRowComponent extends DataTableComponent
     public function columns(): array
     {
         return [
-            Column::make('FileName')
+            Column::make('Name')
                 ->sortable()
                 ->searchable(),
             Column::make('Size')
-                ->addClass('table_center table_col_width_10'),
-            Column::make('Uploaded')
-                ->addClass('table_center table_col_width_15'),
+                ->sortable()
+                ->addClass('table_col_width_10'),
+            Column::make('Uploaded', 'created_at')
+                ->sortable()
+                ->addClass('table_col_width_15'),
             Column::make('Download')
                 ->addClass('table_center table_col_width_5'),
             Column::make('Delete')
@@ -38,8 +40,7 @@ class ClientMediaTableRowComponent extends DataTableComponent
         return
             Media::query()
                 ->where('model_type', 'App\Models\Client')
-                ->where('model_id', $this->client->id)
-                ->latest();
+                ->where('model_id', $this->client->id);
     }
 
     public function rowView(): string
