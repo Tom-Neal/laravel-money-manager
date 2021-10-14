@@ -78,7 +78,7 @@ class Client extends Model implements HasMedia
             )
             .
             str_pad(
-                substr((int)$this->lastInvoice->number + 1, 3),
+                substr($this->lastInvoice->number, 3) + 1,
                 3,
                 '0',
                 STR_PAD_LEFT

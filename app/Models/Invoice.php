@@ -66,7 +66,7 @@ class Invoice extends Model
 
     public function getNumberFormattedAttribute(): string
     {
-        return "#" . round((int)$this->number);
+        return "#" . $this->number;
     }
 
     public function getTotalFormattedAttribute(): string
