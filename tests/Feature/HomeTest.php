@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Models\{Invoice, User};
+use App\Models\User;
 use Database\Seeders\{
     ClientTypeTableSeeder,
     InvoiceStatusTableSeeder,
@@ -12,7 +12,7 @@ use Database\Seeders\{
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\{RefreshDatabase, WithFaker};
 
-class InvoiceCopyTest extends TestCase
+class HomeTest extends TestCase
 {
     use WithFaker, RefreshDatabase;
 
@@ -25,21 +25,12 @@ class InvoiceCopyTest extends TestCase
         $this->actingAsAdmin();
     }
 
-    public function test_get_invoice_copy_view()
+    public function test_get_home_view()
     {
-        $invoice = Invoice::factory()->create();
-        $response = $this->get('/invoices/copy/'.$invoice->id);
+        $response = $this->get('/home');
         $response->assertOk();
-    }
-
-    public function test_invoice_copy_store()
-    {
-        $this->withoutExceptionHandling();
-        $invoice = Invoice::factory()->create();
-        $this->assertDatabaseCount('invoices', 1);
-        $response = $this->post('/invoices/copy/'.$invoice->id);
-        $response->assertRedirect();
-        $this->assertDatabaseCount('invoices', 2);
+        $response->assertViewHas('invoiceYears');
+        $response->assertViewHas('expenseYears');
     }
 
     private function seedDatabase()

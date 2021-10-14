@@ -24,7 +24,7 @@ class InvoiceFactory extends Factory
     public function definition()
     {
         return [
-            'number'            => rand(0, 1000),
+            'number'            => rand(100, 999),
             'invoice_status_id' => InvoiceStatus::SENT,
             'client_id'         => Client::factory()
         ];

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Setting;
+use App\Http\Requests\SettingRequest;
 
 class SettingController extends Controller
 {
@@ -13,7 +14,7 @@ class SettingController extends Controller
             ->with(compact('settings'));
     }
 
-    public function update(Setting $settings)
+    public function update(SettingRequest $request, Setting $settings)
     {
         $settings->update(request([
             'name', 'email', 'phone', 'bank_name', 'bank_account_number', 'bank_sort_code', 'google_map_api_key'

@@ -51,7 +51,7 @@
                                     @endforeach
                                 </td>
                                 <td class="table_center">
-                                    {{ $client->lastInvoice->date_paid }}
+                                    {{ $client->lastInvoice->date_sent ?? '-' }}
                                 </td>
                                 <td class="table_center">
                                     <a class="btn btn-primary btn-sm" href="{{ url('clients/show', $client) }}">

@@ -51,7 +51,6 @@ class ClientInvoiceTableRowComponent extends DataTableComponent
         return
             Invoice::query()
                 ->where('client_id', $this->client->id)
-                ->orderBy('date_sent', 'desc')
                 ->with('invoiceStatus', 'items');
     }
 

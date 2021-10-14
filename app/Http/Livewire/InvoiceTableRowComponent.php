@@ -20,7 +20,8 @@ class InvoiceTableRowComponent extends DataTableComponent
                 ->sortable()
                 ->searchable()
                 ->addClass('table_center table_col_width_5'),
-            Column::make('Client'),
+            Column::make('Client', 'client.name')
+                ->searchable(),
             Column::make('First Item'),
             Column::make('Date Sent')
                 ->sortable()
@@ -47,7 +48,6 @@ class InvoiceTableRowComponent extends DataTableComponent
     {
         return
             Invoice::query()
-                ->orderBy('date_sent', 'desc')
                 ->with('client', 'invoiceStatus', 'items');
     }
 
