@@ -6,6 +6,33 @@ use App\Traits\AmountFormatter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Models\Expense
+ *
+ * @property int $id
+ * @property string $description
+ * @property string|null $price
+ * @property string|null $price_with_vat
+ * @property int $vat_included
+ * @property string|null $date_incurred
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read string $price_formatted
+ * @property-read string $price_with_vat_formatted
+ * @property-read string $total_formatted
+ * @method static \Illuminate\Database\Eloquent\Builder|Expense newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Expense newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Expense query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Expense whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Expense whereDateIncurred($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Expense whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Expense whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Expense wherePrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Expense wherePriceWithVat($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Expense whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Expense whereVatIncluded($value)
+ * @mixin \Eloquent
+ */
 class Expense extends Model
 {
     use HasFactory, AmountFormatter;
