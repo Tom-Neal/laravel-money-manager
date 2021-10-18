@@ -2,25 +2,15 @@
 
 namespace App\Models;
 
+use App\Traits\AmountFormatter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Expense extends Model
 {
-    use HasFactory;
+    use HasFactory, AmountFormatter;
 
     protected $table = 'expenses';
-    protected $appends = ['price_formatted', 'price_with_vat_formatted'];
-
-    public function getPriceFormattedAttribute(): string
-    {
-        return "£" . substr(round($this->price), 0, -2) . "." . substr(round($this->price), -2);
-    }
-
-    public function getPriceWithVatFormattedAttribute(): string
-    {
-        return "£" . substr(round($this->price_with_vat), 0, -2) . "." . substr(round($this->price_with_vat), -2);
-    }
 
     public function getPriceWithVAT(): int
     {

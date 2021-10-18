@@ -33,6 +33,10 @@
             <i class="fas fa-file-download me-1"></i>
             File Storage
         </a>
+        <a href="{{ url('comments') }}" class="list-group-item pt-3 pb-3">
+            <i class="fas fa-comment me-1"></i>
+            Comments
+        </a>
         <a href="{{ url('settings/edit', App\Models\Setting::PREFERENCES) }}" class="list-group-item pt-3 pb-3">
             <i class="fas fa-cogs me-1"></i>
             Settings

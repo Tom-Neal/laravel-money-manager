@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Mail\InvoiceClientMail;
+use App\Traits\AmountFormatter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\{BelongsTo, HasMany, HasOne, HasOneThrough, MorphMany};
@@ -10,11 +11,11 @@ use Illuminate\Support\Facades\Mail;
 
 class Invoice extends Model
 {
-    use HasFactory;
+    use HasFactory, AmountFormatter;
 
     protected $table = 'invoices';
     protected $with = ['firstItem', 'lastPayment'];
-    protected $appends = ['total_formatted', 'number_formatted'];
+    protected $appends = ['number_formatted'];
 
     public function client(): BelongsTo
     {
@@ -67,11 +68,6 @@ class Invoice extends Model
     public function getNumberFormattedAttribute(): string
     {
         return "#" . $this->number;
-    }
-
-    public function getTotalFormattedAttribute(): string
-    {
-        return "£" . substr(round($this->total), 0, -2) . "." . substr(round($this->total), -2);
     }
 
     public function getFilePdfNameAttribute(): string

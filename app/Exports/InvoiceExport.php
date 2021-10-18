@@ -26,7 +26,8 @@ class InvoiceExport implements FromCollection, WithMapping, WithHeadings, WithCo
         return
             Invoice::query()
                 ->orderBy('date_sent')
-                ->with('client.clientType', 'invoiceStatus', 'items')
+                ->with('client.clientType', 'invoiceStatus')
+                ->withCount('items')
                 ->get();
     }
 
@@ -41,7 +42,7 @@ class InvoiceExport implements FromCollection, WithMapping, WithHeadings, WithCo
             $row->client->clientType->name,
             $row->client->name,
             $row->invoiceStatus->name,
-            $row->items->count(),
+            $row->items_count,
         ];
     }
 

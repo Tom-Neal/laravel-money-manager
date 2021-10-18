@@ -48,7 +48,7 @@ class InvoiceTableRowComponent extends DataTableComponent
     {
         return
             Invoice::query()
-                ->with('client', 'invoiceStatus', 'items');
+                ->with('client:id,name', 'invoiceStatus', 'items');
     }
 
     public function rowView(): string

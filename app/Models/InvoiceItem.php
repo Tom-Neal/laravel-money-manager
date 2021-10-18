@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Mail\InvoiceItemRenewalRequiredMail;
+use App\Traits\AmountFormatter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -11,7 +12,7 @@ use Carbon\Carbon;
 
 class InvoiceItem extends Model
 {
-    use HasFactory;
+    use HasFactory, AmountFormatter;
 
     protected $table = 'invoice_items';
     protected $touches = ['invoice'];
@@ -32,11 +33,6 @@ class InvoiceItem extends Model
         return $query->where('renewal_required', '<', Carbon::now()->subWeek())
             ->where('renewal_required', '>', Carbon::now())
             ->latest('renewal_required');
-    }
-
-    public function getPriceFormattedAttribute(): string
-    {
-        return "£" . substr($this->price, 0, -2) . "." . substr($this->price, -2);
     }
 
     public function sendEmailAsRenewalRequired()

@@ -70,6 +70,8 @@ Route::group( ['middleware' => 'auth'], function() {
         Route::get('expenses',                      [\App\Http\Controllers\ExportController::class, 'expense']);
     });
 
+    Route::get('comments',                          \App\Http\Controllers\CommentController::class);
+
     Route::get('media',                             \App\Http\Controllers\MediaController::class);
 
     Route::prefix('media/download')->group(function() {

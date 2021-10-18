@@ -45,7 +45,7 @@ class ExpensePage extends Component
             'date_incurred'  => $this->date_incurred,
             'vat_included'   => $this->vat_included
         ]);
-        $this->description = $this->price = $this->date_incurred = NULL;
+        $this->reset(['description', 'price', 'date_incurred']);
         $this->dispatchBrowserEvent(
             'notify', ['type' => 'success', 'message' => 'Expense Added']
         );
