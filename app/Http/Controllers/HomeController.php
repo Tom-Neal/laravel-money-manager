@@ -15,14 +15,24 @@ class HomeController extends Controller
     )
     {
         if (auth()->user()) {
+
             $invoiceYears = $invoiceTaxYearService->groupTogether();
+
             $expenseYears = $expenseTaxYearService->groupTogether();
+
             $invoiceItemsRenewalRequired = InvoiceItem::query()->renewalRequiredSoon()->with('invoice')->get();
-            $recentInvoices = Invoice::query()->where('updated_at', '>', Carbon::now()->subMonth())->with('client', 'invoiceStatus')->take(4)->get();
+
+            $recentInvoices = Invoice::query()
+                ->where('updated_at', '>', Carbon::now()->subMonth())
+                ->with('client', 'invoiceStatus')
+                ->take(4)
+                ->get();
+
             return view('home')
                 ->with(compact(
                     'invoiceYears', 'expenseYears', 'invoiceItemsRenewalRequired', 'recentInvoices'
                 ));
+
         }
         return redirect('login');
     }

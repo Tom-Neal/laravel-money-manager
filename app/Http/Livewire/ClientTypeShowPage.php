@@ -24,7 +24,7 @@ class ClientTypeShowPage extends Component
     {
         $clients = $this->clientType
             ->clients()
-            ->with('lastInvoice')
+            ->with('businesses', 'lastInvoice')
             ->orderBy('name')
             ->paginate(20);
         return view('livewire.client-type-show-page')
@@ -38,7 +38,7 @@ class ClientTypeShowPage extends Component
             'name'  => $this->name,
             'email' => $this->email
         ])->address()->create();
-        $this->name = $this->email = NULL;
+        $this->reset('name', 'email');
         $this->dispatchBrowserEvent(
             'notify', ['type' => 'success', 'message' => 'Web Development Added']
         );

@@ -24,7 +24,7 @@ class InvoiceTaxYearService
             // Scope to paid if needed (date_paid may be set but has been refunded?)
             if ($paid) $invoices = $invoices->paid();
             // Include relations?
-            if($withRelations) $invoiceYears["$year-" . ($year + 1)] = $invoices->with('client', 'items', 'payments');
+            if($withRelations) $invoiceYears["$year-" . ($year + 1)] = $invoices->with('client.clientType', 'client.address', 'items', 'payments');
             $invoiceYears["$year-" . ($year + 1)] = $invoices->get();
             $year--;
         }
