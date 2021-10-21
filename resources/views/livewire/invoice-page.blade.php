@@ -25,15 +25,15 @@
         <div class="row">
             <x-error></x-error>
             <div class="col-lg-2 mb-3">
-                <label for="name">#</label>
+                <label for="number">#</label>
                 <input class="form-control" wire:model.lazy="invoice.number" wire:change="update('invoice.number')" />
             </div>
             <div class="col-lg-2 mb-3">
-                <label for="name">Total (in pence)</label>
+                <label for="total">Total (in pence)</label>
                 <input class="form-control" type="number" wire:model.lazy="invoice.total" wire:change="update('invoice.total')" />
             </div>
             <div class="col-lg-2 mb-3">
-                <label for="name">Invoice status</label>
+                <label for="invoice_status_id">Invoice status</label>
                 <select class="form-control text-{{ $invoice->invoiceStatus->colour }} fw-bold" wire:model.lazy="invoice.invoice_status_id" wire:change="update('invoice.invoice_status_id')">
                     @foreach($invoiceStatuses as $invoiceStatus)
                         <option
@@ -46,17 +46,41 @@
                 </select>
             </div>
             <div class="col-lg-2 mb-3">
-                <label for="name">Date sent</label>
-                <input class="form-control date-picker" type="text" placeholder="Date sent" wire:model.lazy="invoice.date_sent" wire:change="update('invoice.date_sent')" />
+                <label for="date_sent">Date sent</label>
+                <input
+                    class="form-control input-reset"
+                    type="text"
+                    placeholder="Date sent"
+                    wire:model.lazy="invoice.date_sent"
+                    x-data
+                    x-init="flatpickr($refs.input, {
+                        onChange: function(dateObj, dateStr) {
+                            @this.call('update', {{ $invoice->date_sent }}, dateStr)
+                        }
+                      });"
+                    x-ref="input"
+                />
                 <label class="fas fa-calendar-alt icon_input"></label>
             </div>
             <div class="col-lg-2 mb-3">
-                <label for="name">Date paid</label>
-                <input class="form-control date-picker" type="text" placeholder="Date paid" wire:model.lazy="invoice.date_paid" wire:change="update('invoice.date_paid')" />
+                <label for="date_paid">Date paid</label>
+                <input
+                    class="form-control input-reset"
+                    type="text"
+                    placeholder="Date paid"
+                    wire:model.lazy="invoice.date_paid"
+                    x-data
+                    x-init="flatpickr($refs.input, {
+                        onChange: function(dateObj, dateStr) {
+                            @this.call('update', {{ $invoice->date_paid }}, dateStr)
+                        }
+                      });"
+                    x-ref="input"
+                />
                 <label class="fas fa-calendar-alt icon_input"></label>
             </div>
             <div class="col-lg-2 mb-3">
-                <label for="name">Business</label>
+                <label for="business_id">Business</label>
                 <select class="form-control" wire:model.lazy="invoice.business_id" wire:change="update('invoice.business_id')">
                     <option value="{{ NULL }}">-</option>
                     @foreach($invoice->client->businesses as $business)
