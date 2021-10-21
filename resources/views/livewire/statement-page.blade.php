@@ -10,12 +10,26 @@
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label>Date Start</label>
-                <input class="form-control date-picker" placeholder="Date Start" wire:model.defer="dateStart" />
+                <input
+                    class="form-control input-reset"
+                    placeholder="Date Start"
+                    wire:model.defer="dateStart"
+                    x-data
+                    x-init="flatpickr($refs.input);"
+                    x-ref="input"
+                />
                 <label class="fas fa-calendar-alt icon_input"></label>
             </div>
             <div class="col-md-6 mb-3">
                 <label>Date End</label>
-                <input class="form-control date-picker" placeholder="Date End" wire:model.defer="dateEnd" />
+                <input
+                    class="form-control input-reset"
+                    placeholder="Date End"
+                    wire:model.defer="dateEnd"
+                    x-data
+                    x-init="flatpickr($refs.input);"
+                    x-ref="input"
+                />
                 <label class="fas fa-calendar-alt icon_input"></label>
             </div>
             <div class="col-md-12 text-end">

@@ -14,6 +14,7 @@ class StatementPage extends Component
     public string $dateEnd;
     public array $clientTypeInvoices;
     public int $expenseTotal;
+    public int $expenseTotalWithVat;
 
     public function render()
     {
@@ -30,25 +31,36 @@ class StatementPage extends Component
 
     public function getData()
     {
-        // TODO - Refactor to service class
+        // Retrieve invoice by client type and expense data
 
-        $clientTypes = ClientType::all();
+        $clientTypes = ClientType::all(['id', 'name']);
+
         foreach($clientTypes as $clientType) {
-            $invoiceTotal = Invoice::query()->whereBetween('date_paid', [$this->dateStart, $this->dateEnd])
+
+            $invoiceTotal = Invoice::query()
+                ->whereBetween('date_paid', [$this->dateStart, $this->dateEnd])
                 ->whereHas('client', function($query) use($clientType) {
                     $query->where('client_type_id', $clientType->id);
                 })->sum('total');
+
             $this->clientTypeInvoices["$clientType->name"] = $invoiceTotal;
+
         }
 
-        $this->expenseTotal = Expense::query()->whereBetween('date_incurred', [$this->dateStart, $this->dateEnd])->sum('price');
+        $this->expenseTotal = Expense::query()
+            ->whereBetween('date_incurred', [$this->dateStart, $this->dateEnd])
+            ->sum('price');
 
-        $this->expenseTotalWithVat = Expense::query()->whereBetween('date_incurred', [$this->dateStart, $this->dateEnd])->sum('price_with_vat');
+        $this->expenseTotalWithVat = Expense::query()
+            ->whereBetween('date_incurred', [$this->dateStart, $this->dateEnd])
+            ->sum('price_with_vat');
 
         $this->showData = true;
+
         $this->dispatchBrowserEvent(
             'notify', ['type' => 'success', 'message' => 'Data Retrieved']
         );
+
     }
 
 }
