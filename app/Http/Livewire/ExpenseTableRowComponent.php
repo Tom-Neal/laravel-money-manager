@@ -26,6 +26,9 @@ class ExpenseTableRowComponent extends DataTableComponent
             Column::make('Date Incurred')
                 ->sortable()
                 ->addClass('table_col_width_15'),
+            Column::make('Type', 'category')
+                ->sortable()
+                ->addClass('table_col_width_15'),
             Column::make('Edit')
                 ->addClass('table_center table_col_width_5'),
         ];

@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $price_with_vat
  * @property int $vat_included
  * @property string|null $date_incurred
+ * @property string $category
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read string $price_formatted
@@ -38,6 +39,9 @@ class Expense extends Model
     use HasFactory, AmountFormatter;
 
     protected $table = 'expenses';
+
+    public const CATEGORY_CHARGE = 'charge';
+    public const CATEGORY_TRAVEL = 'travel';
 
     public function getPriceWithVAT(): int
     {

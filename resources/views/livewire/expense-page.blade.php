@@ -10,7 +10,7 @@
         <div class="col-md-12">
             <h3>Add New Expense</h3>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 mb-3">
             <div class="row">
                 <div class="col-md-12 mb-3">
                     <label for="name">Description</label>
@@ -18,18 +18,25 @@
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="email">Price (in pence)</label>
-                    <input class="form-control" placeholder="Expense price" type="number" wire:model="price" />
+                    <input class="form-control" placeholder="Expense price" type="number" wire:model.defer="price" />
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="email">Date incurred</label>
-                    <input class="form-control date-picker" placeholder="Date incurred" wire:model="date_incurred" />
+                    <input class="form-control date-picker" placeholder="Date incurred" wire:model.defer="date_incurred" />
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
+                    <label for="category">Type</label>
+                    <select class="form-select" wire:model.defer="category">
+                        <option value="charge">Charge</option>
+                        <option value="travel">Travel</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
                     <label for="vat_included">VAT included?</label>
-                    <input class="form-check" type="checkbox" checked wire:model="vat_included" />
+                    <input class="form-check" type="checkbox" checked wire:model.defer="vat_included" />
                 </div>
-                <div class="col-md-6 text-end">
-                    <button class="btn btn-success" wire:click="store()" @if(!$description) disabled @endif>Add Expense</button>
+                <div class="col-md-4 text-end">
+                    <button class="btn btn-success mt-3" wire:click="store()" @if(!$description) disabled @endif>Add Expense</button>
                 </div>
             </div>
         </div>

@@ -8,6 +8,9 @@
 <td>
     {{ date('d/m/Y', strtotime($row->date_incurred)) }}
 </td>
+<td>
+    {{ ucfirst($row->category) }}
+</td>
 <td class="table_center">
     <a class="btn btn-warning btn-sm" href="{{ url('expenses/edit', $row) }}">
         <i class="fas fa-wrench text-white" aria-hidden="true"></i>

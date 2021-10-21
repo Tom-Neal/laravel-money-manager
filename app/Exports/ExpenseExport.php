@@ -24,7 +24,7 @@ class ExpenseExport implements FromCollection, WithMapping, WithHeadings, WithCo
     {
         return
             Expense::query()
-            ->orderBy('date_incurred')
+            ->oldest('date_incurred')
             ->get();
     }
 
@@ -34,7 +34,8 @@ class ExpenseExport implements FromCollection, WithMapping, WithHeadings, WithCo
             $row->description,
             $row->price_formatted,
             $row->price_with_vat_formatted,
-            date('d/m/Y', strtotime($row->date_incurred))
+            date('d/m/Y', strtotime($row->date_incurred)),
+            ucfirst($row->category)
         ];
     }
 
@@ -45,6 +46,7 @@ class ExpenseExport implements FromCollection, WithMapping, WithHeadings, WithCo
             'Price',
             'Price (with VAT)',
             'Date Incurred',
+            'Type',
         ];
     }
 
