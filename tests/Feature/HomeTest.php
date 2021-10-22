@@ -9,6 +9,7 @@ use Database\Seeders\{
     SettingTableSeeder,
     UserTableSeeder
 };
+use Illuminate\Support\Facades\Cache;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\{RefreshDatabase, WithFaker};
 
@@ -31,6 +32,12 @@ class HomeTest extends TestCase
         $response->assertOk();
         $response->assertViewHas('invoiceYears');
         $response->assertViewHas('expenseYears');
+        $response->assertViewHas('recentInvoices');
+        $response->assertViewHas('invoiceItemsRenewalRequired');
+        Cache::shouldReceive('invoiceYearsCache');
+        Cache::shouldReceive('expenseYearsCache');
+        Cache::shouldReceive('renewalRequiredSoonCache');
+        Cache::shouldReceive('recentInvoicesCache');
     }
 
     private function seedDatabase()

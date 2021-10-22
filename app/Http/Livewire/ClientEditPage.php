@@ -12,6 +12,8 @@ class ClientEditPage extends Component
     public string $projectName = '';
     public string $businessName = '';
 
+    public $listeners = ['destroy'];
+
     public function rules(): array
     {
         return [
@@ -54,6 +56,24 @@ class ClientEditPage extends Component
         $this->dispatchBrowserEvent(
             'notify', ['type' => 'success', 'message' => 'Client address updated']
         );
+    }
+
+    public function destroy()
+    {
+        $clientTypeId = $this->client->client_type_id;
+        $this->client->delete();
+        return redirect()->to('client-types/show/' . $clientTypeId)->with('message', 'Client Deleted');
+    }
+
+    public function destroyConfirm()
+    {
+        $this->dispatchBrowserEvent('swal:confirm', [
+            'type'              => 'warning',
+            'title'             => 'Attention!',
+            'text'              => 'Are you sure you want to delete this client?',
+            'confirmButtonText' => 'Delete',
+            'id'                => $this->client->id
+        ]);
     }
 
     public function storeProject()
@@ -124,13 +144,6 @@ class ClientEditPage extends Component
     public function addBusiness()
     {
         $this->businesses[] = [''];
-    }
-
-    public function destroy()
-    {
-        $clientTypeId = $this->client->client_type_id;
-        $this->client->delete();
-        return redirect()->to('client-types/show/' . $clientTypeId);
     }
 
 }

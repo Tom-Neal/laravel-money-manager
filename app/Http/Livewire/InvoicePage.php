@@ -13,6 +13,8 @@ class InvoicePage extends Component
     public string $invoiceItemDescription = '';
     public int $invoicePaymentTotal = 0;
 
+    public $listeners = ['destroy'];
+
     public function rules(): array
     {
         return [
@@ -57,7 +59,19 @@ class InvoicePage extends Component
     {
         $clientId = $this->invoice->client_id;
         $this->invoice->delete();
-        return redirect()->to("clients/show/$clientId");
+        return redirect()->to("clients/show/$clientId")
+            ->with('message', 'Invoice Deleted');
+    }
+
+    public function destroyConfirm()
+    {
+        $this->dispatchBrowserEvent('swal:confirm', [
+            'type'              => 'warning',
+            'title'             => 'Attention!',
+            'text'              => 'Are you sure you want to delete this invoice?',
+            'confirmButtonText' => 'Delete',
+            'id'                => $this->invoice->id
+        ]);
     }
 
     public function storeInvoiceItem()

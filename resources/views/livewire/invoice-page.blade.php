@@ -241,7 +241,7 @@
     </div>
     <div class="row">
         <div class="col-lg-3">
-            <button class="btn btn-danger w-100" wire:click="destroy()">
+            <button class="btn btn-danger w-100" wire:click="destroyConfirm()">
                 Delete Invoice
                 <i class="fas fa-times ms-1"></i>
             </button>

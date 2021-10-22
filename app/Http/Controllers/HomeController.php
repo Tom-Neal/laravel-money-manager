@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Cache;
 use App\Services\{InvoiceTaxYearService, ExpenseTaxYearService};
 use App\Models\{Invoice, InvoiceItem};
 
@@ -16,17 +17,32 @@ class HomeController extends Controller
     {
         if (auth()->user()) {
 
-            $invoiceYears = $invoiceTaxYearService->groupTogether();
+            // Caching this data for a short period of time
+            $cacheSeconds = 60;
 
-            $expenseYears = $expenseTaxYearService->groupTogether();
+            $invoiceYears = Cache::remember('invoiceYearsCache', $cacheSeconds, function () use($invoiceTaxYearService) {
+                return $invoiceTaxYearService->groupTogether();
+            });
 
-            $invoiceItemsRenewalRequired = InvoiceItem::query()->renewalRequiredSoon()->with('invoice')->get();
+            $expenseYears = Cache::remember('expenseYearsCache', $cacheSeconds, function () use($expenseTaxYearService) {
+                return $expenseTaxYearService->groupTogether();
+            });
 
-            $recentInvoices = Invoice::query()
-                ->where('updated_at', '>', Carbon::now()->subMonth())
-                ->with('client', 'invoiceStatus')
-                ->take(4)
-                ->get();
+            $invoiceItemsRenewalRequired = Cache::remember('renewalRequiredSoonCache', $cacheSeconds, function () {
+                return InvoiceItem::query()
+                    ->renewalRequiredSoon()
+                    ->with('invoice')
+                    ->get();
+            });
+
+            $recentInvoices = Cache::remember('recentInvoicesCache', $cacheSeconds, function () {
+                return Invoice::query()
+                    ->where('updated_at', '>', Carbon::now()->subMonth())
+                    ->with('client', 'invoiceStatus')
+                    ->latest('updated_at')
+                    ->take(4)
+                    ->get();
+            });
 
             return view('home')
                 ->with(compact(

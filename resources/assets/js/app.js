@@ -36,4 +36,20 @@ document.addEventListener("DOMContentLoaded", function(event) {
         new bootstrap.Alert(alert)
     });
 
+    /* SweetAlert delete validation */
+    window.addEventListener('swal:confirm', event => {
+        swal({
+            title: event.detail.title,
+            text: event.detail.text,
+            type: event.detail.type,
+            confirmButtonText: event.detail.confirmButtonText,
+            confirmButtonColor: '#DD6B55',
+            showCancelButton: true,
+            closeOnConfirm: true
+        },
+        function(){
+            window.livewire.emit('destroy', event.detail.id);
+        });
+    });
+
 });

@@ -148,7 +148,7 @@
     @if($client->invoices_count === 0)
         <div class="row">
             <div class="col-md-3">
-                <button class="btn btn-danger w-100" wire:click="destroy()">Delete Client</button>
+                <button class="btn btn-danger w-100" wire:click="destroyConfirm()">Delete Client</button>
             </div>
         </div>
     @endif
