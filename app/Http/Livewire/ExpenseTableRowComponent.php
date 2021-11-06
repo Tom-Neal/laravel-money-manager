@@ -12,6 +12,9 @@ class ExpenseTableRowComponent extends DataTableComponent
 
     public array $perPageAccepted = [10, 25, 50];
     public bool $perPageAll = true;
+    public string $defaultSortColumn = 'date_incurred';
+    public string $defaultSortDirection = 'desc';
+    protected $listeners = ['store' => 'query'];
 
     public function columns(): array
     {

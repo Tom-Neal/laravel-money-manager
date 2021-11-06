@@ -47,13 +47,14 @@ class ExpensePage extends Component
     {
         Expense::create([
             'description'    => $this->description,
-            'price'          => $this->vat_included ? ($this->price / 6) * 5 : $this->price,
-            'price_with_vat' => $this->vat_included ? $this->price : $this->price * 1.2,
+            'price'          => $this->vat_included ? round(($this->price / 6) * 5) : $this->price,
+            'price_with_vat' => $this->vat_included ? $this->price : round($this->price * 1.2),
             'date_incurred'  => $this->date_incurred,
             'category'       => $this->category,
             'vat_included'   => $this->vat_included
         ]);
         $this->reset(['description', 'price', 'date_incurred', 'category']);
+        $this->emit('store');
         $this->dispatchBrowserEvent(
             'notify', ['type' => 'success', 'message' => 'Expense Added']
         );
@@ -62,7 +63,8 @@ class ExpensePage extends Component
     public function getCurrentTaxYearTotal(): string
     {
         $currentTaxYear = DateHelper::getCurrentTaxYear();
-        return '£' . round(Expense::whereBetween('date_incurred', ["$currentTaxYear-04-06", ($currentTaxYear + 1) . '-04-06'])->sum('price') / 100, 2);
+        return
+            '£' . round(Expense::whereBetween('date_incurred', ["$currentTaxYear-04-06", ($currentTaxYear + 1) . '-04-06'])->sum('price') / 100, 2);
     }
 
     public function getCurrentTaxYear($expenses): string

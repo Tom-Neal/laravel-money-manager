@@ -40,7 +40,7 @@ class ClientTypeShowPage extends Component
         ])->address()->create();
         $this->reset('name', 'email');
         $this->dispatchBrowserEvent(
-            'notify', ['type' => 'success', 'message' => 'Web Development Added']
+            'notify', ['type' => 'success', 'message' => 'Client Added']
         );
     }
 
