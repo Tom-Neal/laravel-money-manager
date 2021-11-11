@@ -55,7 +55,7 @@
                     x-data
                     x-init="flatpickr($refs.input, {
                         onChange: function(dateObj, dateStr) {
-                            @this.call('update', {{ $invoice->date_sent }}, dateStr)
+                            @this.call('update', {{ $invoice->date_sent ?? '2021-11-11' }}, dateStr)
                         }
                       });"
                     x-ref="input"
@@ -72,7 +72,7 @@
                     x-data
                     x-init="flatpickr($refs.input, {
                         onChange: function(dateObj, dateStr) {
-                            @this.call('update', {{ $invoice->date_paid }}, dateStr)
+                            @this.call('update', {{ $invoice->date_paid ?? '2021-11-11' }}, dateStr)
                         }
                       });"
                     x-ref="input"

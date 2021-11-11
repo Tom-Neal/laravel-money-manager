@@ -9,7 +9,7 @@
     <div class="card card-body mb-3">
         <div class="row">
             <div class="col-md-12 mb-3">
-                @forelse(auth()->user()->comments as $comment)
+                @forelse($comments as $comment)
                     <div class="border mb-3 mt-3 rounded">
                         <div class="d-flex flex-column comment-section">
                             <div class="p-2 bg-light">
@@ -17,12 +17,29 @@
                                     <div class="d-flex flex-column justify-content-start ml-2">
                                         <span class="date text-black-50">{{ date('H:i d/m/Y', strtotime($comment->created_at)) }}</span>
                                     </div>
-                                    <button class="btn btn-outline-danger btn-sm" wire:click="destroy({{ $comment->id }})">
-                                        <i class="fas fa-times"></i>
-                                    </button>
+                                    <div>
+                                        <button
+                                            class="btn btn-outline-warning btn-sm me-1"
+                                            @if((int)$edit === (int)$comment->id) wire:click="resetEdit()" @else wire:click="edit({{ $comment->id }})" @endif
+                                        >
+                                            <i class="fas fa-wrench"></i>
+                                        </button>
+                                        <button class="btn btn-outline-danger btn-sm" wire:click="destroy({{ $comment->id }})">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
                                 </div>
                                 <div class="mt-2">
-                                    <?php echo $comment->description; ?>
+                                    @if((int)$edit === (int)$comment->id)
+                                        <textarea
+                                            class="form-control mb-3"
+                                            rows="3"
+                                            wire:model.lazy="comments.{{ $loop->index }}.description"
+                                            wire:change="update('comments.{{ $loop->index }}.description')"
+                                        ></textarea>
+                                    @else
+                                        <?php echo $comment->description; ?>
+                                    @endif
                                 </div>
                             </div>
                         </div>
