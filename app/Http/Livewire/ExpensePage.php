@@ -12,7 +12,7 @@ class ExpensePage extends Component
     public ?string $description = NULL;
     public ?int $price = NULL;
     public ?string $date_incurred = NULL;
-    public string $category = '';
+    public string $category = 'charge';
     public bool $vat_included = true;
     public string $currentTaxYear = '';
     public string $currentTaxYearTotal = '';
