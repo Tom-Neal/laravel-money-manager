@@ -6,6 +6,7 @@ use App\Models\{Client, Comment, InvoiceStatus};
 use Livewire\{Component, WithFileUploads};
 use Spatie\MediaLibrary\MediaCollections\Exceptions\FileDoesNotExist;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use App\Helpers\CurrencyHelper;
 
 class ClientShowPage extends Component
 {
@@ -16,6 +17,7 @@ class ClientShowPage extends Component
     public ?int $invoiceTotal = NULL;
     public ?string $invoiceDateSent = NULL;
     public ?string $invoiceDatePaid = NULL;
+    public string $invoiceSum = '';
     public int $invoiceDateStatusId = 1;
     public string $commentDescription = '';
     public $files = [];
@@ -41,6 +43,7 @@ class ClientShowPage extends Component
     {
         $this->invoiceStatuses = InvoiceStatus::all();
         $this->invoiceDateSent = date('Y-m-d', strtotime(NOW()));
+        $this->invoiceSum = CurrencyHelper::getFormattedValue($this->client->invoices()->paid()->sum('total'));
     }
 
     public function storeInvoice()

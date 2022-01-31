@@ -56,8 +56,11 @@
     </div>
     <div class="card card-body mb-3">
         <div class="row">
-            <div class="col-md-12">
-                <h3>Invoices</h3>
+            <div class="col-md-12 mb-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h3>Invoices</h3>
+                    <h4>Total (paid): {{ $invoiceSum }}</h4>
+                </div>
             </div>
             <div class="col-md-12">
                 @livewire('client-invoice-table-row-component', ['client' => $client])

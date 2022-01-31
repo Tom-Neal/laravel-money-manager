@@ -17,6 +17,7 @@ class ClientTypeRequest extends FormRequest
         $rules = [
             'name'        => ['required', 'max:255'],
             'description' => ['nullable'],
+            'icon'        => ['nullable', 'max:255']
         ];
         return $rules;
     }
