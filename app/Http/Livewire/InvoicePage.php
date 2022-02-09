@@ -19,7 +19,7 @@ class InvoicePage extends Component
     {
         return [
             'invoice.number'                     => 'required|string',
-            'invoice.total'                      => 'nullable|integer',
+            'invoice.total'                      => 'required|integer',
             'invoice.date_sent'                  => 'nullable|string',
             'invoice.date_paid'                  => 'nullable|string',
             'invoice.invoice_status_id'          => 'required|integer',
@@ -48,6 +48,8 @@ class InvoicePage extends Component
     {
         $this->validateOnly($propertyName);
         // Workaround to address empty string !== NULL
+        $this->invoice->date_sent = $this->invoice->date_sent ? : NULL;
+        $this->invoice->date_paid = $this->invoice->date_paid ? : NULL;
         $this->invoice->business_id = $this->invoice->business_id ? : NULL;
         $this->invoice->save();
         $this->dispatchBrowserEvent(

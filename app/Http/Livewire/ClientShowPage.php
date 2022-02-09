@@ -14,7 +14,7 @@ class ClientShowPage extends Component
 
     public Client $client;
     public $invoiceStatuses;
-    public ?int $invoiceTotal = NULL;
+    public $invoiceTotal = NULL;
     public ?string $invoiceDateSent = NULL;
     public ?string $invoiceDatePaid = NULL;
     public string $invoiceSum = '';
@@ -25,7 +25,7 @@ class ClientShowPage extends Component
     public function rules(): array
     {
         return [
-            'invoiceTotal'        => ['nullable', 'string'],
+            'invoiceTotal'        => ['required', 'integer'],
             'invoiceDateSent'     => ['nullable', 'string'],
             'invoiceDatePaid'     => ['nullable', 'string'],
             'invoiceDateStatusId' => ['required', 'integer'],

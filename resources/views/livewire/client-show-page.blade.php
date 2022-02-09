@@ -49,7 +49,7 @@
                     <label class="fas fa-calendar-alt icon_input"></label>
                 </div>
                 <div class="col-md-12 mt-3 text-end">
-                    <button class="btn btn-success" wire:click="storeInvoice()">Add New Invoice</button>
+                    <button class="btn btn-success" wire:click="storeInvoice()" @if(!$invoiceTotal) disabled @endif>Add New Invoice</button>
                 </div>
             </div>
         </div>
