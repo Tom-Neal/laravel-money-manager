@@ -1,7 +1,7 @@
 # Laravel Money Manager
 Personal project for funsies
 
-Laravel 8, Livewire 2, Alpine 2 and Bootstrap 5
+Laravel 9, Livewire 2, Alpine 2 and Bootstrap 5
 
 ## Credits
 
