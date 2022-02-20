@@ -2,10 +2,12 @@
 # {{ config('app.name').' '.$invoice->client->clientType->name. ': Invoice '. $invoice->number_formatted }}
 
 Dear {{ $invoice->client->name }},
-@component('mail::panel')
+
 <?php echo $text; ?>
-@endcomponent
+<br /><br />
 Regards,<br />
-Tom
+Tom<br />
+
+<em>Attached invoice sent from {{ config('app.name') }} invoice system.</em>
 
 @endcomponent
