@@ -12,8 +12,9 @@ class InvoicePage extends Component
     public $invoiceStatuses;
     public string $invoiceItemDescription = '';
     public int $invoicePaymentTotal = 0;
+    public ?string $clientDescription = NULL;
 
-    public $listeners = ['destroy'];
+    public $listeners = ['updateClientDescription', 'destroy'];
 
     public function rules(): array
     {
@@ -30,6 +31,7 @@ class InvoicePage extends Component
             'invoice.items.*.renewal_required'   => 'nullable|string',
             'invoice.payments.*.total'           => 'required|integer',
             'invoice.payments.*.date_paid'       => 'nullable|string',
+            'clientDescription'                  => 'required|string',
         ];
     }
 
@@ -42,6 +44,7 @@ class InvoicePage extends Component
     public function mount()
     {
         $this->invoiceStatuses = InvoiceStatus::all();
+        $this->clientDescription = $this->invoice->client_description;
     }
 
     public function update($propertyName)
@@ -55,6 +58,16 @@ class InvoicePage extends Component
         $this->dispatchBrowserEvent(
             'notify', ['message' => 'Invoice Updated']
         );
+    }
+
+    public function updateClientDescription(array $array)
+    {
+        // Bit hacky but works with rich text editor
+        $this->clientDescription = data_get($array, 'client_description');
+        $this->invoice->update([
+            'client_description' => $this->clientDescription
+        ]);
+        $this->dispatchBrowserEvent('notify', ['message' => 'Client Description Updated']);
     }
 
     public function destroy()

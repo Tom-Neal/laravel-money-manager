@@ -36,7 +36,7 @@ class InvoiceTest extends TestCase
 
     public function test_get_invoice_edit_view()
     {
-        $invoice = Invoice::factory()->create();
+        $invoice  = Invoice::factory()->create();
         $response = $this->get('/invoices/edit/' . $invoice->id);
         $response->assertOk();
         $response->assertSeeLivewire(InvoicePage::class);
@@ -46,14 +46,19 @@ class InvoiceTest extends TestCase
     {
         $invoice = Invoice::factory()->create();
 
-        $number = 1234;
+        $number            = 1234;
+        $clientDescription = "<div><div>Test Text</div><div>Street Name</div><div>Postcode</div></div>";
         Livewire::test(InvoicePage::class, [
             'invoice' => $invoice
         ])
             ->set('invoice.number', $number)
-            ->call('update', 'number');
+            ->call('update', 'number')
+            ->call('updateClientDescription', [
+                'client_description' => $clientDescription
+            ]);
         $this->assertDatabaseHas('invoices', [
-           'number' => $number
+            'number'             => $number,
+            'client_description' => $clientDescription
         ]);
 
         $business = Business::factory()->create();

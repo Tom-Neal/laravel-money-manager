@@ -9,6 +9,10 @@
                 <i class="fas fa-arrow-left me-1"></i>
                 Back to Client
             </a>
+            <a class="btn btn-primary" href="{{ url('invoices/download/preview', $invoice) }}" target="_blank">
+                <i class="fas fa-eye me-1"></i>
+                Preview
+            </a>
         </div>
     </div>
     @if(!$invoice->invoicePaymentTotalCheck())
@@ -25,15 +29,15 @@
         <div class="row">
             <x-error></x-error>
             <div class="col-lg-2 mb-3">
-                <label for="number">#</label>
+                <label for="number"># <span class="asterisk">*</span></label>
                 <input class="form-control" wire:model.lazy="invoice.number" wire:change="update('invoice.number')" />
             </div>
             <div class="col-lg-2 mb-3">
-                <label for="total">Total (in pence)</label>
+                <label for="total">Total (in pence) <span class="asterisk">*</span></label>
                 <input class="form-control" type="number" wire:model.lazy="invoice.total" wire:change="update('invoice.total')" />
             </div>
             <div class="col-lg-2 mb-3">
-                <label for="invoice_status_id">Invoice status</label>
+                <label for="invoice_status_id">Invoice status <span class="asterisk">*</span></label>
                 <select class="form-control text-{{ $invoice->invoiceStatus->colour }} fw-bold" wire:model.lazy="invoice.invoice_status_id" wire:change="update('invoice.invoice_status_id')">
                     @foreach($invoiceStatuses as $invoiceStatus)
                         <option
@@ -91,6 +95,23 @@
                         </option>
                     @endforeach
                 </select>
+            </div>
+            <div class="col-lg-12" x-data="form()">
+                <hr />
+                <label for="client_description">Client Description (replaces client name and address if populated)</label>
+                <div class="mb-2" wire:ignore>
+                    <trix-editor
+                        input="client_description"
+                        @input.debounce.1000ms="save"
+                    ></trix-editor>
+                </div>
+                <input
+                    id="client_description"
+                    name="client_description"
+                    value='{{ $clientDescription }}'
+                    type="hidden"
+                    x-ref="client_description"
+                />
             </div>
         </div>
     </div>

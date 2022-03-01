@@ -136,21 +136,27 @@
             <div id="middle">
                 <div id="customer" class="padding-10">
                     <div class="underline padding-3 green">Customer Details</div>
-                    <div class="padding-3 font-small">
-                        {{ $invoice->client->name }}
-                    </div>
-                    @if($invoice->business && $invoice->business->address)
-                        <div class="padding-3 font-small">{{ $invoice->business->address->name }}</div>
-                        <div class="padding-3 font-small">{{ $invoice->business->address->address_1 }}</div>
-                        <div class="padding-3 font-small">{{ $invoice->business->address->address_2 }}</div>
-                        <div class="padding-3 font-small">{{ $invoice->business->address->address_3 }}</div>
-                        <div class="padding-3 font-small">{{ $invoice->business->address->postcode }}</div>
-                    @elseif($invoice->client->address)
-                        <div class="padding-3 font-small">{{ $invoice->client->address->name }}</div>
-                        <div class="padding-3 font-small">{{ $invoice->client->address->address_1 }}</div>
-                        <div class="padding-3 font-small">{{ $invoice->client->address->address_2 }}</div>
-                        <div class="padding-3 font-small">{{ $invoice->client->address->address_3 }}</div>
-                        <div class="padding-3 font-small">{{ $invoice->client->address->postcode }}</div>
+                    @if($invoice->client_description)
+                        <div class="padding-3 font-small">
+                            <?php echo $invoice->client_description; ?>
+                        </div>
+                    @else
+                        <div class="padding-3 font-small">
+                            {{ $invoice->client->name }}
+                        </div>
+                        @if($invoice->business && $invoice->business->address)
+                            <div class="padding-3 font-small">{{ $invoice->business->address->name }}</div>
+                            <div class="padding-3 font-small">{{ $invoice->business->address->address_1 }}</div>
+                            <div class="padding-3 font-small">{{ $invoice->business->address->address_2 }}</div>
+                            <div class="padding-3 font-small">{{ $invoice->business->address->address_3 }}</div>
+                            <div class="padding-3 font-small">{{ $invoice->business->address->postcode }}</div>
+                        @elseif($invoice->client->address)
+                            <div class="padding-3 font-small">{{ $invoice->client->address->name }}</div>
+                            <div class="padding-3 font-small">{{ $invoice->client->address->address_1 }}</div>
+                            <div class="padding-3 font-small">{{ $invoice->client->address->address_2 }}</div>
+                            <div class="padding-3 font-small">{{ $invoice->client->address->address_3 }}</div>
+                            <div class="padding-3 font-small">{{ $invoice->client->address->postcode }}</div>
+                        @endif
                     @endif
                 </div>
                 <div id="business" class="padding-10 right margin-correct-100">
