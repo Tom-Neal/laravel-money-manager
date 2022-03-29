@@ -14,12 +14,12 @@
         "laravel/slack-notification-channel": "^2.0",
         "laravel/tinker": "^2.5",
         "league/flysystem-aws-s3-v3": "^3.0",
-        "league/flysystem-ziparchive": "3.0",
         "livewire/livewire": "^2.10",
         "maatwebsite/excel": "^3.1",
         "rappasoft/laravel-livewire-tables": "^1.16",
         "spatie/laravel-backup": "^8.0.0",
-        "spatie/laravel-medialibrary": "10.0.7"
+        "spatie/laravel-medialibrary": "10.0.7",
+        "ext-zip": "*"
     },
     "require-dev": {
       "barryvdh/laravel-debugbar": "^3.6",
